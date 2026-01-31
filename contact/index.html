@@ -1,88 +1,262 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Contact | Cupcake City</title>
-  <link rel="stylesheet" href="../css/styles.css">
-  
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Contact Cupcake City for orders and custom cupcakes." />
+<meta name="theme-color" content="#ff4f87" />
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+<link rel="stylesheet" href="../css/styles.css" />
+<title>Contact | Cupcake City</title>
 </head>
 <body>
-  <header class="nav">
-    <div class="container nav-inner">
-      <a class="brand" href="/">
-        <span class="brand-badge">🧁</span>
-        <span>Cupcake City</span>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="../index.html" aria-label="Cupcake City Home">
+      <span class="brand-mark" aria-hidden="true">🧁</span>
+      <span class="brand-name">Cupcake City</span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-nav-toggle>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+
+    <nav class="site-nav" data-site-nav>
+      <a href="../shop/index.html">Shop</a>
+      <a href="../about/index.html">About</a>
+      <a href="../contact/index.html">Contact</a>
+      <a class="nav-cart" href="../cart/index.html" aria-label="Cart">
+        Cart <span class="cart-badge" data-cart-count>0</span>
       </a>
+    </nav>
+  </div>
+</header>
 
-      <nav class="nav-links" aria-label="primary">
-        <a href="/">Home</a>
-        <a href="/shop/">Shop</a>
-        <a href="/about/">About</a>
-        <a href="/contact/">Contact</a>
-        <a class="cart-pill" href="/cart/">
-          Cart <span class="cart-count" data-cart-count>0</span>
-        </a>
-      </nav>
-
-      <button class="mobile-toggle" id="mobileToggle" type="button">Menu</button>
-    </div>
-    <div class="container mobile-menu" id="mobileMenu" aria-label="mobile">
-      <a href="/">Home</a>
-      <a href="/shop/">Shop</a>
-      <a href="/about/">About</a>
-      <a href="/contact/">Contact</a>
-      <a href="/cart/">Cart (<span data-cart-count>0</span>)</a>
-    </div>
-  </header>
-
-  
 <main class="container">
-  <section class="section">
-    <div class="section-title">
-      <h2>Contact</h2>
-      <div class="hint">Custom cupcakes · Events · Bulk orders</div>
-    </div>
+  <div class="page-head">
+    <h1>Contact</h1>
+    <p>Orders, custom cupcakes, and event bookings.</p>
+  </div>
 
-    <div class="card block">
-      <div class="two-col">
-        <div>
-          <h3 style="margin:0 0 8px;">Reach us</h3>
-          <p class="muted" style="margin:0 0 10px; line-height:1.8;">
-            📍 Nairobi, Kenya<br>
-            🕘 Mon–Sat, 9am–6pm
-          </p>
+  <div class="grid" style="grid-template-columns: 1fr 1fr;">
+    <div class="card" style="padding:18px;">
+      <h2 style="margin-top:0;">Reach us</h2>
+      <p class="muted">We respond fastest on WhatsApp. For large orders, include the date, quantity, and theme.</p>
 
-          <a class="btn btn-primary" href="https://wa.me/254700000000" target="_blank" rel="noopener">
-            Chat on WhatsApp
-          </a>
-        </div>
+      <ul class="footer-links" style="margin-top:12px;">
+        <li><strong>Phone:</strong> <a href="tel:+254700000000">+254 700 000 000</a></li>
+        <li><strong>Email:</strong> <a href="mailto:orders@cupcakecity.co.ke">orders@cupcakecity.co.ke</a></li>
+        <li><strong>Location:</strong> <span class="muted">Nairobi, Kenya</span></li>
+      </ul>
 
-        <div>
-          <h3 style="margin:0 0 8px;">Quick notes</h3>
-          <div class="notice">
-            For themed/custom orders, send: (1) date, (2) quantity, (3) flavor, (4) theme colors, (5) delivery location.
-          </div>
-          <div class="hr"></div>
-          <div class="notice">
-            Want a “Cake City style” category layout with more pages (cupcakes / mini / kids / special)? Say so and I’ll add them.
-          </div>
-        </div>
+      <div class="product-actions" style="margin-top:14px;">
+        <a class="btn btn-primary" href="https://wa.me/254700000000" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn btn-ghost" href="../shop/index.html">Browse cupcakes</a>
       </div>
     </div>
-  </section>
+
+    <div class="card" style="padding:18px;">
+      <h2 style="margin-top:0;">Send a message</h2>
+      <form id="contactForm">
+        <div class="form-row">
+          <label for="name">Name</label>
+          <input id="name" required placeholder="Your name" />
+        </div>
+        <div class="form-row">
+          <label for="phone">Phone</label>
+          <input id="phone" required placeholder="07xx xxx xxx" />
+        </div>
+        <div class="form-row">
+          <label for="msg">Message</label>
+          <textarea id="msg" required placeholder="Tell us what you need (date, quantity, flavours, theme)…"></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Open WhatsApp</button>
+        <p class="muted small">This form doesn’t submit to a server. It opens WhatsApp with your message.</p>
+      </form>
+    </div>
+  </div>
 </main>
 
-
-  <footer class="footer">
-    <div class="container">
-      <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
-        <div>© 2026 Cupcake City · Nairobi</div>
-        <div class="muted">Fresh bakes · Custom orders · Events</div>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-brand">
+        <span aria-hidden="true">🧁</span>
+        <strong>Cupcake City</strong>
       </div>
+      <p class="muted">Fresh cupcakes baked daily in Nairobi. Pre-order for events and same-day pickups (subject to availability).</p>
     </div>
-  </footer>
 
-  <script src="../js/main.js"></script>
+    <div>
+      <h4>Quick links</h4>
+      <ul class="footer-links">
+        <li><a href="../shop/index.html">Shop</a></li>
+        <li><a href="../cart/index.html">Cart</a></li>
+        <li><a href="../about/index.html">About</a></li>
+        <li><a href="../contact/index.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>Contact</h4>
+      <ul class="footer-links">
+        <li><a href="tel:+254700000000">+254 700 000 000</a></li>
+        <li><a href="mailto:orders@cupcakecity.co.ke">orders@cupcakecity.co.ke</a></li>
+        <li class="muted">Nairobi, Kenya</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <small class="muted">© 2026 Cupcake City. All rights reserved.</small>
+  </div>
+</footer>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+window.CC_PRODUCTS = [
+  {
+    "id": "classic-vanilla-6",
+    "name": "Classic Vanilla (6 Pack)",
+    "category": "Cupcakes",
+    "price": 1050,
+    "compareAt": 1200,
+    "image": "https://images.unsplash.com/photo-1589307004391-70fcdcf8a3c7?auto=format&fit=crop&w=1200&q=80",
+    "short": "Light vanilla sponge with silky buttercream.",
+    "description": "A crowd-pleaser: fluffy vanilla cupcakes topped with smooth vanilla buttercream. Great for office treats, birthdays, and events.",
+    "tags": [
+      "vanilla",
+      "best-seller"
+    ],
+    "variants": [
+      "Vanilla",
+      "Vanilla + Sprinkles",
+      "Vanilla + Strawberry drizzle"
+    ],
+    "featured": true
+  },
+  {
+    "id": "choco-fudge-4",
+    "name": "Chocolate Fudge (4 Pack)",
+    "category": "Cupcakes",
+    "price": 720,
+    "compareAt": 0,
+    "image": "https://images.unsplash.com/photo-1599785209707-28d08b7d35a3?auto=format&fit=crop&w=1200&q=80",
+    "short": "Rich chocolate sponge + fudge frosting.",
+    "description": "Deep cocoa cupcakes finished with a glossy fudge frosting. Perfect when you want something bold and chocolatey.",
+    "tags": [
+      "chocolate"
+    ],
+    "variants": [
+      "Classic Fudge",
+      "Fudge + Choco chips",
+      "Fudge + Oreo crumbs"
+    ],
+    "featured": true
+  },
+  {
+    "id": "red-velvet-6",
+    "name": "Red Velvet (6 Pack)",
+    "category": "Cupcakes",
+    "price": 1200,
+    "compareAt": 0,
+    "image": "https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=1200&q=80",
+    "short": "Velvety crumb with cream-cheese swirl.",
+    "description": "Soft red velvet cupcakes topped with a lightly tangy cream-cheese frosting. A classic celebration flavour.",
+    "tags": [
+      "red-velvet"
+    ],
+    "variants": [
+      "Classic",
+      "Extra Cream Cheese",
+      "Heart Sprinkles"
+    ],
+    "featured": false
+  },
+  {
+    "id": "lemon-zest-6",
+    "name": "Lemon Zest (6 Pack)",
+    "category": "Cupcakes",
+    "price": 1100,
+    "compareAt": 0,
+    "image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=1200&q=80",
+    "short": "Bright lemon + smooth vanilla glaze.",
+    "description": "Fresh lemon flavour with a soft crumb and a light glaze. Best served chilled for extra zing.",
+    "tags": [
+      "citrus"
+    ],
+    "variants": [
+      "Classic Lemon",
+      "Lemon + Poppy",
+      "Lemon + Blueberry"
+    ],
+    "featured": false
+  },
+  {
+    "id": "kids-party-12",
+    "name": "Kids Party Mix (12 Pack)",
+    "category": "Bundles",
+    "price": 2100,
+    "compareAt": 2400,
+    "image": "https://images.unsplash.com/photo-1614707267537-2f3b9fbf3d3b?auto=format&fit=crop&w=1200&q=80",
+    "short": "A colourful mix for birthdays & school events.",
+    "description": "A fun assortment (vanilla, chocolate, strawberry) with colourful sprinkles. Great for kid-friendly celebrations.",
+    "tags": [
+      "bundle",
+      "kids"
+    ],
+    "variants": [
+      "Mixed Flavours",
+      "Chocolate-Heavy Mix",
+      "Vanilla-Heavy Mix"
+    ],
+    "featured": true
+  },
+  {
+    "id": "wedding-white-12",
+    "name": "Wedding White (12 Pack)",
+    "category": "Events",
+    "price": 2600,
+    "compareAt": 0,
+    "image": "https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=1200&q=80",
+    "short": "Elegant white cupcakes for weddings & ceremonies.",
+    "description": "Elegant vanilla cupcakes with smooth white frosting and subtle pearl sprinkles. Ideal for weddings, baby showers, and formal events.",
+    "tags": [
+      "event",
+      "premium"
+    ],
+    "variants": [
+      "Pearl Sprinkles",
+      "Gold Dust",
+      "Rose Petals (Edible)"
+    ],
+    "featured": false
+  }
+];
+
+</script>
+<script src="../js/main.js"></script>
+<script>
+  (function(){
+    const form = document.getElementById("contactForm");
+    if(!form) return;
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+      const phone = "254700000000"; // TODO change
+      const name = document.getElementById("name").value.trim();
+      const userPhone = document.getElementById("phone").value.trim();
+      const msg = document.getElementById("msg").value.trim();
+      const text =
+        "Hello Cupcake City 👋\n\n" +
+        "Name: " + name + "\n" +
+        "Phone: " + userPhone + "\n\n" +
+        msg;
+
+      window.open("https://wa.me/" + phone + "?text=" + encodeURIComponent(text), "_blank", "noopener,noreferrer");
+    });
+  })();
+</script>
 </body>
 </html>

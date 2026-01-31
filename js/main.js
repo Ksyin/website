@@ -1,404 +1,386 @@
-/* Cupcake City - production-ready static store (no build tools)
-   - Data: PRODUCTS array (each has image)
-   - Pages:
-      /shop/   renders listing
-      /product/?id=slug  renders single
-      /cart/   renders cart
-*/
+/* Cupcake City - Production-ready vanilla JS (no build tools) */
+(function () {
+  "use strict";
 
-const WHATSAPP_PHONE = "254700000000"; // TODO: replace
-const CURRENCY = "KES";
-
-const PRODUCTS = [
-  {
-    id: "choco-fudge-4",
-    name: "Chocolate Fudge Cupcakes (4 Pack)",
-    category: "Cupcakes",
-    price: 720,
-    image: "https://images.unsplash.com/photo-1599785209707-28d08b7d35a3?auto=format&fit=crop&w=1200&q=80",
-    description: "Rich cocoa cupcakes topped with silky chocolate fudge. Perfect for quick treats and small celebrations.",
-    tags: ["Best Seller", "Chocolate"]
-  },
-  {
-    id: "vanilla-velvet-6",
-    name: "Vanilla Velvet Cupcakes (6 Pack)",
-    category: "Cupcakes",
-    price: 1050,
-    image: "https://images.unsplash.com/photo-1589307004391-70fcdcf8a3c7?auto=format&fit=crop&w=1200&q=80",
-    description: "Soft vanilla sponge with a smooth vanilla bean frosting. Clean, classic, and always a crowd favorite.",
-    tags: ["Classic", "Vanilla"]
-  },
-  {
-    id: "red-velvet-6",
-    name: "Red Velvet Cupcakes (6 Pack)",
-    category: "Cupcakes",
-    price: 1200,
-    image: "https://images.unsplash.com/photo-1528839032308-6ea2b0b23d0a?auto=format&fit=crop&w=1200&q=80",
-    description: "A velvet-soft bite with a gentle cocoa note and cream-cheese style frosting. Elegant and indulgent.",
-    tags: ["Premium", "Velvet"]
-  },
-  {
-    id: "lemon-zest-4",
-    name: "Lemon Zest Cupcakes (4 Pack)",
-    category: "Cupcakes",
-    price: 780,
-    image: "https://images.unsplash.com/photo-1542826438-bd32f43d626f?auto=format&fit=crop&w=1200&q=80",
-    description: "Bright lemon cupcakes with a zesty glaze. Light, fresh, and perfect after meals.",
-    tags: ["Fresh", "Citrus"]
-  },
-  {
-    id: "caramel-crunch-4",
-    name: "Salted Caramel Crunch (4 Pack)",
-    category: "Cupcakes",
-    price: 850,
-    image: "https://images.unsplash.com/photo-1509365465985-25d11c17e812?auto=format&fit=crop&w=1200&q=80",
-    description: "Caramel frosting, crunchy topping, and a pinch of salt to balance the sweetness. Addictive!",
-    tags: ["Sweet & Salty", "Crunch"]
-  },
-  {
-    id: "kids-sprinkle-6",
-    name: "Sprinkle Party Cupcakes (6 Pack)",
-    category: "Kids",
-    price: 1100,
-    image: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=1200&q=80",
-    description: "Colorful sprinkles, fun frosting, and soft sponge—built for birthdays and happy moments.",
-    tags: ["Party", "Kids"]
-  },
-  {
-    id: "mini-mix-12",
-    name: "Mini Cupcake Mix (12 Pack)",
-    category: "Mini",
-    price: 1350,
-    image: "https://images.unsplash.com/photo-1541976844346-f18aeac57b06?auto=format&fit=crop&w=1200&q=80",
-    description: "A variety pack of mini cupcakes. Great for office snacks and tasting sessions.",
-    tags: ["Variety", "Mini"]
-  },
-  {
-    id: "gluten-free-4",
-    name: "Gluten-Free Cupcakes (4 Pack)",
-    category: "Special",
-    price: 950,
-    image: "https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=1200&q=80",
-    description: "Soft, satisfying cupcakes made with gluten-free ingredients. Balanced texture and rich flavor.",
-    tags: ["Special", "Gluten-Free"]
-  }
-];
-
-// -------------------- Utilities --------------------
-function money(n){
-  return `${CURRENCY} ${Number(n).toLocaleString()}`;
-}
-function $(sel){ return document.querySelector(sel); }
-function getParam(name){
-  const url = new URL(window.location.href);
-  return url.searchParams.get(name);
-}
-function safeText(s){
-  return String(s ?? "").replace(/[<>]/g, "");
-}
-
-function loadCart(){
-  try{
-    return JSON.parse(localStorage.getItem("cc_cart") || "[]");
-  }catch(e){ return []; }
-}
-function saveCart(cart){
-  localStorage.setItem("cc_cart", JSON.stringify(cart));
-  updateCartCount();
-}
-function updateCartCount(){
-  const cart = loadCart();
-  const count = cart.reduce((a,i)=>a + (i.qty || 1), 0);
-  document.querySelectorAll("[data-cart-count]").forEach(el=>el.textContent = String(count));
-}
-
-function addToCart(productId, qty=1){
-  const product = PRODUCTS.find(p=>p.id===productId);
-  if(!product) return;
-  const cart = loadCart();
-  const existing = cart.find(i=>i.id===productId);
-  if(existing) existing.qty = (existing.qty || 1) + qty;
-  else cart.push({ id: productId, qty: qty });
-  saveCart(cart);
-  toast("Added to cart 🛒");
-}
-
-function setQty(productId, qty){
-  const cart = loadCart();
-  const item = cart.find(i=>i.id===productId);
-  if(!item) return;
-  item.qty = Math.max(1, qty|0);
-  saveCart(cart);
-  renderCart();
-}
-
-function removeFromCart(productId){
-  const cart = loadCart().filter(i=>i.id!==productId);
-  saveCart(cart);
-  renderCart();
-}
-
-function clearCart(){
-  saveCart([]);
-  renderCart();
-}
-
-function toast(msg){
-  const t = document.createElement("div");
-  t.style.position="fixed";
-  t.style.left="50%";
-  t.style.bottom="22px";
-  t.style.transform="translateX(-50%)";
-  t.style.background="rgba(31,41,55,.92)";
-  t.style.color="white";
-  t.style.padding="12px 14px";
-  t.style.borderRadius="14px";
-  t.style.fontWeight="800";
-  t.style.zIndex="9999";
-  t.style.boxShadow="0 10px 25px rgba(0,0,0,.18)";
-  t.textContent = msg;
-  document.body.appendChild(t);
-  setTimeout(()=> t.remove(), 1400);
-}
-
-function productCard(p){
-  const badge = (p.tags && p.tags.length) ? `<span class="badge">${safeText(p.tags[0])}</span>` : "";
-  return `
-    <article class="card product">
-      <div class="p-img"><img src="${p.image}" alt="${safeText(p.name)}" loading="lazy"></div>
-      <div class="p-body">
-        <h3 class="p-title">${safeText(p.name)}</h3>
-        <div class="p-meta">
-          <span class="price">${money(p.price)}</span>
-          ${badge}
-        </div>
-      </div>
-      <div class="p-actions">
-        <a class="btn btn-small btn-outline" href="/product/?id=${encodeURIComponent(p.id)}">View</a>
-        <button class="btn btn-small btn-solid" data-add="${p.id}">Add</button>
-      </div>
-    </article>
-  `;
-}
-
-// -------------------- Navbar --------------------
-function setupMobileMenu(){
-  const btn = $("#mobileToggle");
-  const menu = $("#mobileMenu");
-  if(!btn || !menu) return;
-  btn.addEventListener("click", ()=>{
-    menu.classList.toggle("show");
-  });
-}
-
-// -------------------- Home --------------------
-function renderHomeFeatured(){
-  const host = $("#featuredGrid");
-  if(!host) return;
-  const featured = PRODUCTS.slice(0, 6);
-  host.innerHTML = featured.map(productCard).join("");
-  host.querySelectorAll("[data-add]").forEach(b=>{
-    b.addEventListener("click", ()=> addToCart(b.getAttribute("data-add"), 1));
-  });
-}
-
-// -------------------- Shop --------------------
-function renderShop(){
-  const host = $("#shopGrid");
-  if(!host) return;
-
-  const q = ($("#searchInput")?.value || "").toLowerCase().trim();
-  const cat = $("#categorySelect")?.value || "All";
-  const sort = $("#sortSelect")?.value || "featured";
-
-  let list = [...PRODUCTS];
-
-  if(q){
-    list = list.filter(p =>
-      p.name.toLowerCase().includes(q) ||
-      (p.description||"").toLowerCase().includes(q) ||
-      (p.tags||[]).join(" ").toLowerCase().includes(q)
-    );
-  }
-  if(cat !== "All"){
-    list = list.filter(p => p.category === cat);
-  }
-
-  if(sort === "price_asc") list.sort((a,b)=>a.price-b.price);
-  if(sort === "price_desc") list.sort((a,b)=>b.price-a.price);
-  if(sort === "name_asc") list.sort((a,b)=>a.name.localeCompare(b.name));
-
-  host.innerHTML = list.map(productCard).join("") || `<div class="notice">No products found. Try another search.</div>`;
-  host.querySelectorAll("[data-add]").forEach(b=>{
-    b.addEventListener("click", ()=> addToCart(b.getAttribute("data-add"), 1));
-  });
-}
-
-function initShopControls(){
-  const s = $("#searchInput");
-  const c = $("#categorySelect");
-  const o = $("#sortSelect");
-  [s,c,o].forEach(el=>{
-    if(!el) return;
-    el.addEventListener("input", renderShop);
-    el.addEventListener("change", renderShop);
-  });
-  renderShop();
-}
-
-// -------------------- Product Page --------------------
-function renderProduct(){
-  const host = $("#productRoot");
-  if(!host) return;
-  const id = getParam("id") || PRODUCTS[0].id;
-  const p = PRODUCTS.find(x=>x.id===id) || PRODUCTS[0];
-
-  host.innerHTML = `
-    <div class="product-page">
-      <div class="media"><img src="${p.image}" alt="${safeText(p.name)}"></div>
-      <div class="info">
-        <div class="badge">${safeText(p.category)}</div>
-        <h2 style="margin:10px 0 6px;">${safeText(p.name)}</h2>
-        <p class="muted" style="margin:0 0 10px; line-height:1.7;">${safeText(p.description)}</p>
-        <div class="hr"></div>
-        <div style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
-          <div style="font-weight:900; font-size:18px;">${money(p.price)}</div>
-          <div class="muted" style="font-size:13px;">Freshly baked · Nairobi</div>
-        </div>
-        <div class="hr"></div>
-        <div class="qty" style="margin-bottom:12px;">
-          <button id="decQty" aria-label="decrease quantity">−</button>
-          <input id="qtyInput" value="1" inputmode="numeric" aria-label="quantity">
-          <button id="incQty" aria-label="increase quantity">+</button>
-        </div>
-        <button class="btn btn-primary" id="addToCartBtn" style="width:100%;">Add to Cart</button>
-        <div class="notice" style="margin-top:12px;">
-          Tip: You can checkout via WhatsApp on the Cart page.
-        </div>
-      </div>
-    </div>
-  `;
-
-  const qtyInput = $("#qtyInput");
-  const inc = $("#incQty");
-  const dec = $("#decQty");
-  const addBtn = $("#addToCartBtn");
-
-  const clampQty = ()=>{
-    let v = parseInt(qtyInput.value || "1", 10);
-    if(Number.isNaN(v) || v < 1) v = 1;
-    if(v > 99) v = 99;
-    qtyInput.value = String(v);
-    return v;
+  // ---------- Helpers ----------
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+  const money = (n) => {
+    try { return "KES " + Number(n).toLocaleString("en-KE"); }
+    catch { return "KES " + n; }
   };
 
-  inc?.addEventListener("click", ()=>{ qtyInput.value = String(clampQty()+1); clampQty(); });
-  dec?.addEventListener("click", ()=>{ qtyInput.value = String(clampQty()-1); clampQty(); });
-  qtyInput?.addEventListener("input", clampQty);
-  addBtn?.addEventListener("click", ()=> addToCart(p.id, clampQty()));
-}
+  // ---------- Cart (localStorage) ----------
+  const CART_KEY = "cc_cart_v1";
 
-// -------------------- Cart --------------------
-function renderCart(){
-  const host = $("#cartList");
-  const totalEl = $("#cartTotal");
-  const emptyEl = $("#cartEmpty");
-
-  if(!host || !totalEl || !emptyEl) return;
-
-  const cart = loadCart();
-  if(cart.length === 0){
-    host.innerHTML = "";
-    totalEl.textContent = money(0);
-    emptyEl.style.display = "block";
-    return;
+  function readCart() {
+    try {
+      const raw = localStorage.getItem(CART_KEY);
+      const data = raw ? JSON.parse(raw) : [];
+      return Array.isArray(data) ? data : [];
+    } catch {
+      return [];
+    }
   }
-  emptyEl.style.display = "none";
 
-  let total = 0;
-  host.innerHTML = cart.map(item=>{
-    const p = PRODUCTS.find(x=>x.id===item.id);
-    if(!p) return "";
-    const qty = item.qty || 1;
-    const line = p.price * qty;
-    total += line;
+  function writeCart(items) {
+    localStorage.setItem(CART_KEY, JSON.stringify(items));
+  }
 
-    return `
-      <div class="card cart-item">
-        <img src="${p.image}" alt="${safeText(p.name)}">
-        <div>
-          <h4>${safeText(p.name)}</h4>
-          <div class="muted">${money(p.price)} each · <span style="font-weight:900;color:#c02654">${money(line)}</span></div>
-          <div class="cart-actions" style="margin-top:10px;">
-            <button class="icon-btn" data-dec="${p.id}">−</button>
-            <span style="font-weight:900; min-width: 22px; text-align:center;">${qty}</span>
-            <button class="icon-btn" data-inc="${p.id}">+</button>
-            <button class="icon-btn" data-rm="${p.id}">Remove</button>
+  function cartCount(items) {
+    return items.reduce((sum, it) => sum + (Number(it.qty) || 0), 0);
+  }
+
+  function cartTotal(items) {
+    return items.reduce((sum, it) => sum + (Number(it.price) || 0) * (Number(it.qty) || 0), 0);
+  }
+
+  function upsertCartItem(productId, variant, qty) {
+    const products = window.CC_PRODUCTS || [];
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+
+    const items = readCart();
+    const key = productId + "::" + (variant || "");
+    const existing = items.find(i => i.key === key);
+
+    const cleanQty = Math.max(1, Math.min(99, Number(qty) || 1));
+    if (existing) {
+      existing.qty += cleanQty;
+    } else {
+      items.push({
+        key,
+        id: product.id,
+        name: product.name,
+        variant: variant || "",
+        price: product.price,
+        image: product.image,
+        qty: cleanQty
+      });
+    }
+    writeCart(items);
+    syncCartBadges();
+    toast("Added to cart");
+  }
+
+  function setCartQty(key, qty) {
+    const items = readCart();
+    const item = items.find(i => i.key === key);
+    if (!item) return;
+    const n = Number(qty) || 0;
+    if (n <= 0) {
+      writeCart(items.filter(i => i.key !== key));
+    } else {
+      item.qty = Math.max(1, Math.min(99, n));
+      writeCart(items);
+    }
+    syncCartBadges();
+  }
+
+  function clearCart() {
+    writeCart([]);
+    syncCartBadges();
+  }
+
+  // ---------- UI: toast ----------
+  let toastTimer = null;
+  function toast(msg) {
+    const el = $("#toast");
+    if (!el) return;
+    el.textContent = msg;
+    el.classList.add("show");
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove("show"), 2200);
+  }
+
+  // ---------- Nav ----------
+  function setupNav() {
+    const btn = $("[data-nav-toggle]");
+    const nav = $("[data-site-nav]");
+    if (!btn || !nav) return;
+
+    btn.addEventListener("click", () => {
+      const expanded = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", String(!expanded));
+      nav.classList.toggle("open", !expanded);
+    });
+  }
+
+  function syncCartBadges() {
+    const items = readCart();
+    const count = cartCount(items);
+    $$("[data-cart-count]").forEach(el => (el.textContent = String(count)));
+  }
+
+  // ---------- Shop rendering ----------
+  function renderShop() {
+    const grid = $("#shopGrid");
+    if (!grid) return;
+
+    const products = window.CC_PRODUCTS || [];
+    const qInput = $("#q");
+    const catSelect = $("#category");
+    const sortSelect = $("#sort");
+
+    function currentList() {
+      const q = (qInput?.value || "").trim().toLowerCase();
+      const cat = (catSelect?.value || "all").toLowerCase();
+      const sort = (sortSelect?.value || "featured").toLowerCase();
+
+      let list = products.slice();
+
+      if (cat !== "all") {
+        list = list.filter(p => (p.category || "").toLowerCase() === cat);
+      }
+
+      if (q) {
+        list = list.filter(p => {
+          const hay = (p.name + " " + (p.short || "") + " " + (p.tags || []).join(" ")).toLowerCase();
+          return hay.includes(q);
+        });
+      }
+
+      if (sort === "price-asc") list.sort((a, b) => a.price - b.price);
+      if (sort === "price-desc") list.sort((a, b) => b.price - a.price);
+      if (sort === "name-asc") list.sort((a, b) => a.name.localeCompare(b.name));
+      // featured keeps original order
+
+      return list;
+    }
+
+    function card(p) {
+      const compare = p.compareAt && p.compareAt > p.price
+        ? `<span class="price-compare">${money(p.compareAt)}</span>`
+        : "";
+
+      return `
+        <article class="card product-card">
+          <a class="product-link" href="../product/index.html?id=${encodeURIComponent(p.id)}" aria-label="${escapeHtml(p.name)}">
+            <img class="product-img" src="${p.image}" alt="${escapeHtml(p.name)}" loading="lazy" />
+          </a>
+          <div class="product-body">
+            <div class="product-top">
+              <h3 class="product-title">${escapeHtml(p.name)}</h3>
+              <span class="badge">${escapeHtml(p.category || "Cupcakes")}</span>
+            </div>
+            <p class="product-desc">${escapeHtml(p.short || "")}</p>
+            <div class="product-bottom">
+              <div class="price">
+                <span class="price-now">${money(p.price)}</span>
+                ${compare}
+              </div>
+              <a class="btn btn-primary btn-sm" href="../product/index.html?id=${encodeURIComponent(p.id)}">View</a>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function render() {
+      const list = currentList();
+      const rc = $("#resultCount");
+      if (rc) rc.textContent = `${list.length} item${list.length === 1 ? "" : "s"}`;
+      grid.innerHTML = list.map(card).join("");
+    }
+
+    qInput?.addEventListener("input", render);
+    catSelect?.addEventListener("change", render);
+    sortSelect?.addEventListener("change", render);
+
+    render();
+  }
+
+  // ---------- Product page ----------
+  function renderProduct() {
+    const wrap = $("#productPage");
+    if (!wrap) return;
+
+    const products = window.CC_PRODUCTS || [];
+    const params = new URLSearchParams(location.search);
+    const id = params.get("id");
+    const product = products.find(p => p.id === id) || products[0];
+
+    if (!product) {
+      location.href = "../shop/index.html";
+      return;
+    }
+
+    const variantOptions = (product.variants || []).map(v => `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`).join("");
+    wrap.innerHTML = `
+      <div class="product-layout">
+        <div class="product-media">
+          <img src="${product.image}" alt="${escapeHtml(product.name)}" />
+        </div>
+        <div class="product-info">
+          <div class="crumbs">
+            <a href="../shop/index.html">Shop</a>
+            <span aria-hidden="true">›</span>
+            <span>${escapeHtml(product.name)}</span>
+          </div>
+
+          <h1>${escapeHtml(product.name)}</h1>
+          <p class="muted">${escapeHtml(product.description || "")}</p>
+
+          <div class="product-meta">
+            <div class="price price-lg">
+              <span class="price-now">${money(product.price)}</span>
+              ${(product.compareAt && product.compareAt > product.price) ? `<span class="price-compare">${money(product.compareAt)}</span>` : ""}
+            </div>
+            <span class="badge">${escapeHtml(product.category || "Cupcakes")}</span>
+          </div>
+
+          <div class="form-row">
+            <label for="variant">Variant</label>
+            <select id="variant">${variantOptions}</select>
+          </div>
+
+          <div class="form-row">
+            <label for="qty">Quantity</label>
+            <input id="qty" type="number" min="1" max="99" value="1" />
+          </div>
+
+          <div class="product-actions">
+            <button class="btn btn-primary" id="addBtn">Add to cart</button>
+            <a class="btn btn-ghost" href="../cart/index.html">Go to cart</a>
+          </div>
+
+          <div class="notice">
+            <strong>Same-day?</strong> For urgent orders, WhatsApp us before checkout to confirm availability.
           </div>
         </div>
-        <div style="text-align:right; font-weight:900;">${money(line)}</div>
       </div>
     `;
-  }).join("");
 
-  totalEl.textContent = money(total);
-
-  host.querySelectorAll("[data-inc]").forEach(b=>{
-    b.addEventListener("click", ()=> setQty(b.getAttribute("data-inc"), (loadCart().find(i=>i.id===b.getAttribute("data-inc"))?.qty || 1) + 1));
-  });
-  host.querySelectorAll("[data-dec]").forEach(b=>{
-    b.addEventListener("click", ()=>{
-      const id = b.getAttribute("data-dec");
-      const current = loadCart().find(i=>i.id===id)?.qty || 1;
-      setQty(id, Math.max(1, current - 1));
+    $("#addBtn").addEventListener("click", () => {
+      const variant = $("#variant").value || "";
+      const qty = $("#qty").value || 1;
+      upsertCartItem(product.id, variant, qty);
     });
-  });
-  host.querySelectorAll("[data-rm]").forEach(b=>{
-    b.addEventListener("click", ()=> removeFromCart(b.getAttribute("data-rm")));
-  });
-}
-
-function checkoutWhatsApp(){
-  const cart = loadCart();
-  if(cart.length === 0){
-    toast("Your cart is empty");
-    return;
   }
-  const lines = [];
-  let total = 0;
-  cart.forEach(item=>{
-    const p = PRODUCTS.find(x=>x.id===item.id);
-    if(!p) return;
-    const qty = item.qty || 1;
-    const line = p.price * qty;
-    total += line;
-    lines.push(`${qty} x ${p.name} — ${CURRENCY} ${line.toLocaleString()}`);
+
+  // ---------- Cart page ----------
+  function renderCart() {
+    const listEl = $("#cartList");
+    const summaryEl = $("#cartSummary");
+    if (!listEl || !summaryEl) return;
+
+    function line(item) {
+      return `
+        <div class="cart-item" data-key="${escapeHtml(item.key)}">
+          <img class="cart-img" src="${item.image}" alt="${escapeHtml(item.name)}" loading="lazy" />
+          <div class="cart-main">
+            <div class="cart-title">
+              <strong>${escapeHtml(item.name)}</strong>
+              ${item.variant ? `<span class="muted">(${escapeHtml(item.variant)})</span>` : ""}
+            </div>
+            <div class="muted">${money(item.price)} each</div>
+            <div class="cart-controls">
+              <button class="btn btn-ghost btn-xs" data-dec>-</button>
+              <input class="qty" type="number" min="1" max="99" value="${Number(item.qty) || 1}" />
+              <button class="btn btn-ghost btn-xs" data-inc>+</button>
+              <button class="btn btn-danger btn-xs" data-remove>Remove</button>
+            </div>
+          </div>
+          <div class="cart-subtotal">${money((Number(item.price)||0) * (Number(item.qty)||0))}</div>
+        </div>
+      `;
+    }
+
+    function render() {
+      const items = readCart();
+      if (!items.length) {
+        listEl.innerHTML = `
+          <div class="empty">
+            <h2>Your cart is empty</h2>
+            <p class="muted">Browse cupcakes and add your favourites.</p>
+            <a class="btn btn-primary" href="../shop/index.html">Go to shop</a>
+          </div>
+        `;
+        summaryEl.innerHTML = "";
+        return;
+      }
+
+      listEl.innerHTML = items.map(line).join("");
+
+      const total = cartTotal(items);
+      summaryEl.innerHTML = `
+        <div class="card summary-card">
+          <h3>Order summary</h3>
+          <div class="summary-row"><span>Items</span><span>${cartCount(items)}</span></div>
+          <div class="summary-row"><span>Subtotal</span><span>${money(total)}</span></div>
+          <div class="summary-row muted"><span>Delivery</span><span>Calculated on WhatsApp</span></div>
+          <hr />
+          <div class="summary-row total"><span>Total</span><span>${money(total)}</span></div>
+
+          <div class="summary-actions">
+            <button class="btn btn-primary" id="waCheckout">Checkout via WhatsApp</button>
+            <button class="btn btn-ghost" id="clearCart">Clear cart</button>
+          </div>
+
+          <p class="muted small">Checkout opens WhatsApp with your order details.</p>
+        </div>
+      `;
+
+      $$(".cart-item", listEl).forEach(row => {
+        const key = row.getAttribute("data-key");
+        const input = $(".qty", row);
+        const inc = $("[data-inc]", row);
+        const dec = $("[data-dec]", row);
+        const rm = $("[data-remove]", row);
+
+        inc.addEventListener("click", () => { setCartQty(key, (Number(input.value)||1) + 1); render(); });
+        dec.addEventListener("click", () => { setCartQty(key, (Number(input.value)||1) - 1); render(); });
+        rm.addEventListener("click", () => { setCartQty(key, 0); render(); });
+
+        input.addEventListener("change", () => {
+          setCartQty(key, input.value);
+          render();
+        });
+      });
+
+      $("#clearCart").addEventListener("click", () => {
+        clearCart();
+        render();
+        toast("Cart cleared");
+      });
+
+      $("#waCheckout").addEventListener("click", () => {
+        const phone = "254700000000"; // TODO: change to your WhatsApp number (no +)
+        const lines = items.map(it => `• ${it.name}${it.variant ? " ("+it.variant+")" : ""} ×${it.qty} = ${money((it.price*it.qty))}`);
+        const msg = [
+          "Hello Cupcake City 👋",
+          "I’d like to order:",
+          ...lines,
+          "",
+          `Subtotal: ${money(total)}`,
+          "Name:",
+          "Location:",
+          "Preferred delivery/pickup time:"
+        ].join("\n");
+
+        const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+        window.open(url, "_blank", "noopener,noreferrer");
+      });
+    }
+
+    render();
+  }
+
+  function escapeHtml(s) {
+    return String(s)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    setupNav();
+    syncCartBadges();
+    renderShop();
+    renderProduct();
+    renderCart();
   });
 
-  const message =
-    `Hello Cupcake City!%0A%0A` +
-    `I'd like to order:%0A` +
-    lines.map(l=>`• ${encodeURIComponent(l)}`).join("%0A") +
-    `%0A%0ATotal: ${encodeURIComponent(money(total))}%0A` +
-    `Delivery location: (type here)%0A` +
-    `Preferred time: (type here)%0A`;
-
-  window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${message}`, "_blank");
-}
-
-// -------------------- Boot --------------------
-document.addEventListener("DOMContentLoaded", ()=>{
-  updateCartCount();
-  setupMobileMenu();
-
-  renderHomeFeatured();
-  initShopControls();
-  renderProduct();
-  renderCart();
-
-  const checkoutBtn = $("#checkoutBtn");
-  checkoutBtn?.addEventListener("click", checkoutWhatsApp);
-
-  const clearBtn = $("#clearCartBtn");
-  clearBtn?.addEventListener("click", clearCart);
-});
+})();

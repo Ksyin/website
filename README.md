@@ -1,16 +1,22 @@
-# Cupcake City (Static, Production-Ready)
+# Cupcake City (Static)
 
-## Structure (as requested)
-- `index.html` is in the project root
-- All other pages use folder routing: `/shop/`, `/product/`, `/cart/`, `/about/`, `/contact/`
-- CSS in `/css/styles.css`
-- JS in `/js/main.js`
-
-## How product pages work
-`/product/?id=choco-fudge-4`
-
-## WhatsApp checkout
-Edit `WHATSAPP_PHONE` in `/js/main.js`
+**Folder layout required by you**
+- `index.html` in project root
+- other pages in folders (e.g., `/shop/index.html`)
+- `/css/styles.css` and `/js/main.js`
 
 ## Run locally
-Use VS Code Live Server or any static server.
+Use VS Code **Live Server** (recommended), or any static server.
+
+## Deploy
+Works on Netlify / GitHub Pages / Render static / Vercel static.
+
+## Customize
+Update WhatsApp number in:
+- `/js/main.js` (checkout)
+- `/contact/index.html` (contact button + form)
+
+Update products:
+- Each page contains `window.CC_PRODUCTS = [...]` in a script tag.
+  You can copy-paste the same updated list across pages, or you can move it into `/js/products.js`
+  if you prefer a single source of truth.
