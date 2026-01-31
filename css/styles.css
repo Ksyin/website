@@ -1,0 +1,353 @@
+/* =========================================
+   MODERN DASHBOARD THEME (Bento Style)
+   ========================================= */
+
+:root {
+    /* Color Palette */
+    --bg-surface: #f3f6fc;
+    --glass-white: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.6);
+    --primary: #0a2240;      /* Navy */
+    --accent: #2260a9;       /* Bright Blue */
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, #0a2240 0%, #1e3a8a 100%);
+    
+    /* Shadows */
+    --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.04);
+    --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.08);
+    
+    /* Font */
+    --font-main: 'Plus Jakarta Sans', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-surface);
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* --- Ambient Backgrounds --- */
+.ambient-glow {
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    filter: blur(100px);
+    z-index: -1;
+    opacity: 0.5;
+}
+.primary { background: #dbeafe; top: -100px; right: -100px; }
+.secondary { background: #fae8ff; bottom: -100px; left: -100px; }
+
+/* --- Header --- */
+.glass-header {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--glass-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 1rem 0;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.brand-logo {
+    height: 45px;
+    width: auto;
+}
+
+.brand-text h1 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.1;
+}
+
+.brand-text span { color: var(--accent); }
+
+.location-badge {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    background: rgba(0,0,0,0.05);
+    padding: 2px 8px;
+    border-radius: 12px;
+    display: inline-block;
+    margin-top: 4px;
+}
+
+.icon-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--primary);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.icon-btn:hover { transform: scale(1.1); color: var(--accent); }
+
+/* --- Dashboard --- */
+.dashboard-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.welcome-header { margin-bottom: 40px; }
+.welcome-header h2 { font-size: 2rem; color: var(--primary); margin-bottom: 8px; }
+.wave { display: inline-block; animation: wave 2s infinite; transform-origin: 70% 70%; }
+.welcome-header p { color: var(--text-muted); font-size: 1.1rem; }
+
+@keyframes wave {
+    0% { transform: rotate( 0.0deg) }
+    10% { transform: rotate(14.0deg) }
+    20% { transform: rotate(-8.0deg) }
+    30% { transform: rotate(14.0deg) }
+    40% { transform: rotate(-4.0deg) }
+    50% { transform: rotate(10.0deg) }
+    60% { transform: rotate( 0.0deg) }
+    100% { transform: rotate( 0.0deg) }
+}
+
+/* --- Bento Grid --- */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+/* Card Styles */
+.bento-card {
+    background: var(--glass-white);
+    backdrop-filter: blur(10px);
+    border: 1px solid white;
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: var(--shadow-soft);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 180px;
+}
+
+.bento-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+    background: white;
+}
+
+/* Icons */
+.icon-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+    transition: transform 0.3s;
+}
+
+.bento-card:hover .icon-box { transform: scale(1.1) rotate(5deg); }
+
+.primary-icon { background: #e0f2fe; color: #0284c7; }
+.accent-icon { background: #e0e7ff; color: #4338ca; }
+.success-icon { background: #dcfce7; color: #16a34a; }
+.warning-icon { background: #fef3c7; color: #d97706; }
+.info-icon { background: #fce7f3; color: #db2777; }
+.purple-icon { background: #f3e8ff; color: #9333ea; }
+
+.bento-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
+.bento-card p { font-size: 0.9rem; color: var(--text-muted); }
+
+/* Featured Card (Sign In) */
+.featured-card {
+    grid-column: span 2; /* Takes up 2 slots */
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+}
+
+.featured-card:hover { transform: translateY(-8px); background: var(--gradient-primary); }
+.featured-card h3 { font-size: 1.5rem; }
+.featured-card p { color: rgba(255,255,255,0.8); }
+.featured-card .icon-box { background: rgba(255,255,255,0.15); color: white; }
+
+.card-bg-icon {
+    position: absolute;
+    right: -20px;
+    bottom: -20px;
+    font-size: 10rem;
+    color: rgba(255,255,255,0.05);
+    pointer-events: none;
+}
+
+.featured-card .card-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.action-arrow {
+    margin-left: auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+.featured-card:hover .action-arrow { background: white; color: var(--primary); transform: translateX(5px); }
+
+/* --- Footer --- */
+.app-footer {
+    text-align: center;
+    padding: 40px 0;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+/* =========================================
+   MODALS & OVERLAYS
+   ========================================= */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.active { opacity: 1; visibility: visible; }
+
+.glass-modal {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    width: 95%;
+    max-width: 900px;
+    height: 90vh; /* Takes up most of the screen */
+    display: flex;
+    flex-direction: column;
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+    overflow: hidden;
+}
+
+.modal-overlay.active .glass-modal { transform: scale(1); }
+
+/* Contact modal is smaller */
+.contact-modal-container { height: auto; max-width: 500px; }
+
+.modal-header {
+    padding: 16px 24px;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+}
+
+.modal-header h3 { font-size: 1.1rem; color: var(--primary); display: flex; align-items: center; gap: 10px; }
+.close-btn { background: none; border: none; font-size: 1.2rem; color: var(--text-muted); cursor: pointer; padding: 5px; }
+.close-btn:hover { color: var(--primary); }
+
+/* Iframe (Google Form) Styling */
+.iframe-wrapper {
+    flex-grow: 1;
+    position: relative;
+    background: #f8fafc;
+    width: 100%;
+    height: 100%;
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8fafc;
+    z-index: 5;
+}
+
+.spinner-ring {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #e2e8f0;
+    border-top: 4px solid var(--accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* Events & Contact Body */
+.modal-body { padding: 24px; overflow-y: auto; }
+.event-card { background: #f1f5f9; padding: 20px; border-radius: 12px; margin-bottom: 15px; border-left: 4px solid var(--accent); }
+.event-card h4 { color: var(--primary); margin-bottom: 5px; font-size: 1.1rem; }
+.event-time { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px; display: block; }
+
+.contact-row { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; font-size: 1.1rem; }
+.social-row { display: flex; gap: 20px; justify-content: center; margin-top: 30px; }
+.social-row a { font-size: 1.5rem; color: var(--primary); transition: 0.2s; }
+.social-row a:hover { color: var(--accent); transform: translateY(-3px); }
+
+/* --- Mobile Responsive --- */
+@media (max-width: 768px) {
+    .bento-grid { grid-template-columns: 1fr; }
+    .featured-card { grid-column: span 1; }
+    .featured-card .card-content { flex-direction: column; text-align: center; }
+    .action-arrow { margin: 15px auto 0; }
+    .card-bg-icon { font-size: 6rem; opacity: 0.03; }
+    .dashboard-container { padding: 20px 15px; }
+}
