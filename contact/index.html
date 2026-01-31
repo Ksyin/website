@@ -1,183 +1,262 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="American Corner Mtaani - Premium Portal">
-    <meta name="theme-color" content="#0a2240">
-    <title>AC Mtaani | Dashboard</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <link rel="stylesheet" href="css/styles.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Contact Cupcake City for orders and custom cupcakes." />
+<meta name="theme-color" content="#ff4f87" />
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+<link rel="stylesheet" href="../css/styles.css" />
+<title>Contact | Cupcake City</title>
 </head>
 <body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="../index.html" aria-label="Cupcake City Home">
+      <span class="brand-mark" aria-hidden="true">🧁</span>
+      <span class="brand-name">Cupcake City</span>
+    </a>
 
-    <div class="ambient-glow primary"></div>
-    <div class="ambient-glow secondary"></div>
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-nav-toggle>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
 
-    <header class="glass-header">
-        <div class="header-content">
-            <div class="logo-section">
-                <img src="https://knls.ac.ke/wp-content/uploads/2021/08/knls-logo.png" alt="KNLS Logo" class="brand-logo">
-                <div class="brand-text">
-                    <h1>American Corner <span>Mtaani</span></h1>
-                    <p class="location-badge"><i class="fa-solid fa-location-dot"></i> KNLS Nairobi</p>
-                </div>
-            </div>
-            <div class="header-actions">
-                <button class="icon-btn" onclick="openContactModal()" aria-label="Contact Us">
-                    <i class="fa-solid fa-circle-question"></i>
-                </button>
-            </div>
-        </div>
-    </header>
+    <nav class="site-nav" data-site-nav>
+      <a href="../shop/index.html">Shop</a>
+      <a href="../about/index.html">About</a>
+      <a href="../contact/index.html">Contact</a>
+      <a class="nav-cart" href="../cart/index.html" aria-label="Cart">
+        Cart <span class="cart-badge" data-cart-count>0</span>
+      </a>
+    </nav>
+  </div>
+</header>
 
-    <main class="dashboard-container">
-        
-        <section class="welcome-header">
-            <div class="welcome-text">
-                <h2>Hello, Explorer <span class="wave">👋</span></h2>
-                <p>Access resources, events, and services instantly.</p>
-            </div>
-        </section>
+<main class="container">
+  <div class="page-head">
+    <h1>Contact</h1>
+    <p>Orders, custom cupcakes, and event bookings.</p>
+  </div>
 
-        <div class="bento-grid">
-            
-            <div class="bento-card featured-card" onclick="openForm('signIn')">
-                <div class="card-bg-icon"><i class="fa-solid fa-clipboard-user"></i></div>
-                <div class="card-content">
-                    <div class="icon-box primary-icon">
-                        <i class="fa-solid fa-id-card"></i>
-                    </div>
-                    <div class="text-content">
-                        <h3>Daily Sign-In</h3>
-                        <p>Register your visit instantly</p>
-                    </div>
-                    <div class="action-arrow">
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </div>
-                </div>
-            </div>
+  <div class="grid" style="grid-template-columns: 1fr 1fr;">
+    <div class="card" style="padding:18px;">
+      <h2 style="margin-top:0;">Reach us</h2>
+      <p class="muted">We respond fastest on WhatsApp. For large orders, include the date, quantity, and theme.</p>
 
-            <div class="bento-card" onclick="openEventsModal()">
-                <div class="card-content">
-                    <div class="icon-box accent-icon">
-                        <i class="fa-solid fa-calendar-days"></i>
-                    </div>
-                    <h3>Programs</h3>
-                    <p>View upcoming events</p>
-                </div>
-            </div>
+      <ul class="footer-links" style="margin-top:12px;">
+        <li><strong>Phone:</strong> <a href="tel:+254700000000">+254 700 000 000</a></li>
+        <li><strong>Email:</strong> <a href="mailto:orders@cupcakecity.co.ke">orders@cupcakecity.co.ke</a></li>
+        <li><strong>Location:</strong> <span class="muted">Nairobi, Kenya</span></li>
+      </ul>
 
-            <div class="bento-card" onclick="openForm('attendance')">
-                <div class="card-content">
-                    <div class="icon-box success-icon">
-                        <i class="fa-solid fa-check-double"></i>
-                    </div>
-                    <h3>Attendance</h3>
-                    <p>Log participation</p>
-                </div>
-            </div>
-
-            <div class="bento-card" onclick="openForm('request')">
-                <div class="card-content">
-                    <div class="icon-box warning-icon">
-                        <i class="fa-solid fa-book-open-reader"></i>
-                    </div>
-                    <h3>Resources</h3>
-                    <p>Borrow & Return</p>
-                </div>
-            </div>
-
-            <div class="bento-card" onclick="openForm('feedback')">
-                <div class="card-content">
-                    <div class="icon-box info-icon">
-                        <i class="fa-solid fa-heart"></i>
-                    </div>
-                    <h3>Feedback</h3>
-                    <p>Share your thoughts</p>
-                </div>
-            </div>
-
-            <div class="bento-card" onclick="openForm('volunteer')">
-                <div class="card-content">
-                    <div class="icon-box purple-icon">
-                        <i class="fa-solid fa-hand-holding-heart"></i>
-                    </div>
-                    <h3>Volunteer</h3>
-                    <p>Join the team</p>
-                </div>
-            </div>
-
-        </div>
-    </main>
-
-    <footer class="app-footer">
-        <p>© 2026 American Spaces Kenya | <i class="fa-solid fa-flag-usa"></i> Funded by the American people</p>
-    </footer>
-
-    <div id="formOverlay" class="modal-overlay">
-        <div class="glass-modal form-modal-container">
-            <div class="modal-header">
-                <h3 id="formTitle"><i class="fa-brands fa-google"></i> Loading Form...</h3>
-                <button class="close-btn" onclick="closeForm()">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            
-            <div class="iframe-wrapper">
-                <div class="loading-spinner" id="formSpinner">
-                    <div class="spinner-ring"></div>
-                </div>
-                <iframe id="googleFormIframe" src="" allowfullscreen></iframe>
-            </div>
-        </div>
+      <div class="product-actions" style="margin-top:14px;">
+        <a class="btn btn-primary" href="https://wa.me/254700000000" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn btn-ghost" href="../shop/index.html">Browse cupcakes</a>
+      </div>
     </div>
 
-    <div id="eventsModal" class="modal-overlay">
-        <div class="glass-modal events-modal-container">
-            <div class="modal-header">
-                <h3><i class="fa-solid fa-calendar-star"></i> Upcoming Programs</h3>
-                <button class="close-btn" onclick="closeEventsModal()">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <div class="modal-body" id="eventsContainer">
-                </div>
+    <div class="card" style="padding:18px;">
+      <h2 style="margin-top:0;">Send a message</h2>
+      <form id="contactForm">
+        <div class="form-row">
+          <label for="name">Name</label>
+          <input id="name" required placeholder="Your name" />
         </div>
+        <div class="form-row">
+          <label for="phone">Phone</label>
+          <input id="phone" required placeholder="07xx xxx xxx" />
+        </div>
+        <div class="form-row">
+          <label for="msg">Message</label>
+          <textarea id="msg" required placeholder="Tell us what you need (date, quantity, flavours, theme)…"></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Open WhatsApp</button>
+        <p class="muted small">This form doesn’t submit to a server. It opens WhatsApp with your message.</p>
+      </form>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-brand">
+        <span aria-hidden="true">🧁</span>
+        <strong>Cupcake City</strong>
+      </div>
+      <p class="muted">Fresh cupcakes baked daily in Nairobi. Pre-order for events and same-day pickups (subject to availability).</p>
     </div>
 
-    <div id="contactModal" class="modal-overlay">
-        <div class="glass-modal contact-modal-container">
-            <div class="modal-header">
-                <h3>Contact Us</h3>
-                <button class="close-btn" onclick="closeContactModal()">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <div class="modal-body contact-body">
-                <div class="contact-row">
-                    <i class="fa-solid fa-envelope"></i>
-                    <a href="mailto:americancornermtaani@gmail.com">americancornermtaani@gmail.com</a>
-                </div>
-                <div class="contact-row">
-                    <i class="fa-solid fa-phone"></i>
-                    <a href="tel:+254202739893">+254 20 273 9893</a>
-                </div>
-                <div class="social-row">
-                    <a href="https://web.facebook.com/people/American-Corner-Mtaani/61565093887159/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="https://www.instagram.com/usembassykenya" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="https://twitter.com/USEmbassyKenya" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
-                </div>
-            </div>
-        </div>
+    <div>
+      <h4>Quick links</h4>
+      <ul class="footer-links">
+        <li><a href="../shop/index.html">Shop</a></li>
+        <li><a href="../cart/index.html">Cart</a></li>
+        <li><a href="../about/index.html">About</a></li>
+        <li><a href="../contact/index.html">Contact</a></li>
+      </ul>
     </div>
 
-    <script src="js/main.js"></script>
+    <div>
+      <h4>Contact</h4>
+      <ul class="footer-links">
+        <li><a href="tel:+254700000000">+254 700 000 000</a></li>
+        <li><a href="mailto:orders@cupcakecity.co.ke">orders@cupcakecity.co.ke</a></li>
+        <li class="muted">Nairobi, Kenya</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <small class="muted">© 2026 Cupcake City. All rights reserved.</small>
+  </div>
+</footer>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+window.CC_PRODUCTS = [
+  {
+    "id": "classic-vanilla-6",
+    "name": "Classic Vanilla (6 Pack)",
+    "category": "Cupcakes",
+    "price": 1050,
+    "compareAt": 1200,
+    "image": "https://images.unsplash.com/photo-1589307004391-70fcdcf8a3c7?auto=format&fit=crop&w=1200&q=80",
+    "short": "Light vanilla sponge with silky buttercream.",
+    "description": "A crowd-pleaser: fluffy vanilla cupcakes topped with smooth vanilla buttercream. Great for office treats, birthdays, and events.",
+    "tags": [
+      "vanilla",
+      "best-seller"
+    ],
+    "variants": [
+      "Vanilla",
+      "Vanilla + Sprinkles",
+      "Vanilla + Strawberry drizzle"
+    ],
+    "featured": true
+  },
+  {
+    "id": "choco-fudge-4",
+    "name": "Chocolate Fudge (4 Pack)",
+    "category": "Cupcakes",
+    "price": 720,
+    "compareAt": 0,
+    "image": "https://images.unsplash.com/photo-1599785209707-28d08b7d35a3?auto=format&fit=crop&w=1200&q=80",
+    "short": "Rich chocolate sponge + fudge frosting.",
+    "description": "Deep cocoa cupcakes finished with a glossy fudge frosting. Perfect when you want something bold and chocolatey.",
+    "tags": [
+      "chocolate"
+    ],
+    "variants": [
+      "Classic Fudge",
+      "Fudge + Choco chips",
+      "Fudge + Oreo crumbs"
+    ],
+    "featured": true
+  },
+  {
+    "id": "red-velvet-6",
+    "name": "Red Velvet (6 Pack)",
+    "category": "Cupcakes",
+    "price": 1200,
+    "compareAt": 0,
+    "image": "https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=1200&q=80",
+    "short": "Velvety crumb with cream-cheese swirl.",
+    "description": "Soft red velvet cupcakes topped with a lightly tangy cream-cheese frosting. A classic celebration flavour.",
+    "tags": [
+      "red-velvet"
+    ],
+    "variants": [
+      "Classic",
+      "Extra Cream Cheese",
+      "Heart Sprinkles"
+    ],
+    "featured": false
+  },
+  {
+    "id": "lemon-zest-6",
+    "name": "Lemon Zest (6 Pack)",
+    "category": "Cupcakes",
+    "price": 1100,
+    "compareAt": 0,
+    "image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=1200&q=80",
+    "short": "Bright lemon + smooth vanilla glaze.",
+    "description": "Fresh lemon flavour with a soft crumb and a light glaze. Best served chilled for extra zing.",
+    "tags": [
+      "citrus"
+    ],
+    "variants": [
+      "Classic Lemon",
+      "Lemon + Poppy",
+      "Lemon + Blueberry"
+    ],
+    "featured": false
+  },
+  {
+    "id": "kids-party-12",
+    "name": "Kids Party Mix (12 Pack)",
+    "category": "Bundles",
+    "price": 2100,
+    "compareAt": 2400,
+    "image": "https://images.unsplash.com/photo-1614707267537-2f3b9fbf3d3b?auto=format&fit=crop&w=1200&q=80",
+    "short": "A colourful mix for birthdays & school events.",
+    "description": "A fun assortment (vanilla, chocolate, strawberry) with colourful sprinkles. Great for kid-friendly celebrations.",
+    "tags": [
+      "bundle",
+      "kids"
+    ],
+    "variants": [
+      "Mixed Flavours",
+      "Chocolate-Heavy Mix",
+      "Vanilla-Heavy Mix"
+    ],
+    "featured": true
+  },
+  {
+    "id": "wedding-white-12",
+    "name": "Wedding White (12 Pack)",
+    "category": "Events",
+    "price": 2600,
+    "compareAt": 0,
+    "image": "https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=1200&q=80",
+    "short": "Elegant white cupcakes for weddings & ceremonies.",
+    "description": "Elegant vanilla cupcakes with smooth white frosting and subtle pearl sprinkles. Ideal for weddings, baby showers, and formal events.",
+    "tags": [
+      "event",
+      "premium"
+    ],
+    "variants": [
+      "Pearl Sprinkles",
+      "Gold Dust",
+      "Rose Petals (Edible)"
+    ],
+    "featured": false
+  }
+];
+
+</script>
+<script src="../js/main.js"></script>
+<script>
+  (function(){
+    const form = document.getElementById("contactForm");
+    if(!form) return;
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+      const phone = "254700000000"; // TODO change
+      const name = document.getElementById("name").value.trim();
+      const userPhone = document.getElementById("phone").value.trim();
+      const msg = document.getElementById("msg").value.trim();
+      const text =
+        "Hello Cupcake City 👋\n\n" +
+        "Name: " + name + "\n" +
+        "Phone: " + userPhone + "\n\n" +
+        msg;
+
+      window.open("https://wa.me/" + phone + "?text=" + encodeURIComponent(text), "_blank", "noopener,noreferrer");
+    });
+  })();
+</script>
 </body>
 </html>
