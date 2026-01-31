@@ -34,22 +34,6 @@ body {
     position: relative;
 }
 
-/* =========================================
-   HERO IMAGE (HOMEPAGE ONLY)
-   ========================================= */
-
-.hero-media {
-  background:
-    linear-gradient(
-      180deg,
-      rgba(10, 34, 64, 0.25),
-      rgba(10, 34, 64, 0.05)
-    ),
-    url("https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=1600&q=80");
-  background-size: cover;
-  background-position: center;
-}
-
 
 /* --- Ambient Backgrounds --- */
 .ambient-glow {

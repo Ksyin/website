@@ -14,48 +14,6 @@
 const IMAGE_SOURCE = "https://images.unsplash.com";
 
 
-/* =========================================
-   PRODUCT + IMAGE REGISTRY (GLOBAL)
-   ========================================= */
-
-window.CC_PRODUCTS = [
-  {
-    id: "choco-fudge",
-    name: "Chocolate Fudge Cupcakes (4 Pack)",
-    category: "Cupcakes",
-    price: 720,
-    image: `${IMAGE_SOURCE}/photo-1599785209707-28d08b7d35a3?auto=format&fit=crop&w=900&q=80`,
-    short: "Rich chocolate cupcakes with silky fudge.",
-    description: "Rich chocolate cupcakes topped with silky chocolate fudge frosting."
-  },
-  {
-    id: "vanilla-velvet",
-    name: "Vanilla Velvet Cupcakes (6 Pack)",
-    category: "Cupcakes",
-    price: 1050,
-    image: `${IMAGE_SOURCE}/photo-1589307004391-70fcdcf8a3c7?auto=format&fit=crop&w=900&q=80`,
-    short: "Soft vanilla sponge with creamy frosting.",
-    description: "Soft vanilla sponge cupcakes finished with smooth vanilla cream."
-  },
-  {
-    id: "red-velvet",
-    name: "Red Velvet Cupcakes",
-    category: "Cupcakes",
-    price: 1200,
-    image: `${IMAGE_SOURCE}/photo-1528839032308-6ea2b0b23d0a?auto=format&fit=crop&w=900&q=80`,
-    short: "Velvety texture with cream cheese notes.",
-    description: "Classic red velvet cupcakes with a smooth, creamy topping."
-  },
-  {
-    id: "lemon-zest",
-    name: "Lemon Zest Cupcakes",
-    category: "Cupcakes",
-    price: 780,
-    image: `${IMAGE_SOURCE}/photo-1542826438-bd32f43d626f?auto=format&fit=crop&w=900&q=80`,
-    short: "Fresh citrus flavour.",
-    description: "Bright lemon cupcakes finished with a light citrus glaze."
-  }
-];
 
 
   // ---------- Cart (localStorage) ----------
