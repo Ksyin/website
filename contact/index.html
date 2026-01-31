@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="American Corner Mtaani - Premium Portal">
+    <meta name="theme-color" content="#0a2240">
+    <title>AC Mtaani | Dashboard</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <div class="ambient-glow primary"></div>
+    <div class="ambient-glow secondary"></div>
+
+    <header class="glass-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="https://knls.ac.ke/wp-content/uploads/2021/08/knls-logo.png" alt="KNLS Logo" class="brand-logo">
+                <div class="brand-text">
+                    <h1>American Corner <span>Mtaani</span></h1>
+                    <p class="location-badge"><i class="fa-solid fa-location-dot"></i> KNLS Nairobi</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="icon-btn" onclick="openContactModal()" aria-label="Contact Us">
+                    <i class="fa-solid fa-circle-question"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-container">
+        
+        <section class="welcome-header">
+            <div class="welcome-text">
+                <h2>Hello, Explorer <span class="wave">👋</span></h2>
+                <p>Access resources, events, and services instantly.</p>
+            </div>
+        </section>
+
+        <div class="bento-grid">
+            
+            <div class="bento-card featured-card" onclick="openForm('signIn')">
+                <div class="card-bg-icon"><i class="fa-solid fa-clipboard-user"></i></div>
+                <div class="card-content">
+                    <div class="icon-box primary-icon">
+                        <i class="fa-solid fa-id-card"></i>
+                    </div>
+                    <div class="text-content">
+                        <h3>Daily Sign-In</h3>
+                        <p>Register your visit instantly</p>
+                    </div>
+                    <div class="action-arrow">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bento-card" onclick="openEventsModal()">
+                <div class="card-content">
+                    <div class="icon-box accent-icon">
+                        <i class="fa-solid fa-calendar-days"></i>
+                    </div>
+                    <h3>Programs</h3>
+                    <p>View upcoming events</p>
+                </div>
+            </div>
+
+            <div class="bento-card" onclick="openForm('attendance')">
+                <div class="card-content">
+                    <div class="icon-box success-icon">
+                        <i class="fa-solid fa-check-double"></i>
+                    </div>
+                    <h3>Attendance</h3>
+                    <p>Log participation</p>
+                </div>
+            </div>
+
+            <div class="bento-card" onclick="openForm('request')">
+                <div class="card-content">
+                    <div class="icon-box warning-icon">
+                        <i class="fa-solid fa-book-open-reader"></i>
+                    </div>
+                    <h3>Resources</h3>
+                    <p>Borrow & Return</p>
+                </div>
+            </div>
+
+            <div class="bento-card" onclick="openForm('feedback')">
+                <div class="card-content">
+                    <div class="icon-box info-icon">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <h3>Feedback</h3>
+                    <p>Share your thoughts</p>
+                </div>
+            </div>
+
+            <div class="bento-card" onclick="openForm('volunteer')">
+                <div class="card-content">
+                    <div class="icon-box purple-icon">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                    </div>
+                    <h3>Volunteer</h3>
+                    <p>Join the team</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="app-footer">
+        <p>© 2026 American Spaces Kenya | <i class="fa-solid fa-flag-usa"></i> Funded by the American people</p>
+    </footer>
+
+    <div id="formOverlay" class="modal-overlay">
+        <div class="glass-modal form-modal-container">
+            <div class="modal-header">
+                <h3 id="formTitle"><i class="fa-brands fa-google"></i> Loading Form...</h3>
+                <button class="close-btn" onclick="closeForm()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <div class="iframe-wrapper">
+                <div class="loading-spinner" id="formSpinner">
+                    <div class="spinner-ring"></div>
+                </div>
+                <iframe id="googleFormIframe" src="" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div id="eventsModal" class="modal-overlay">
+        <div class="glass-modal events-modal-container">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-calendar-star"></i> Upcoming Programs</h3>
+                <button class="close-btn" onclick="closeEventsModal()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="eventsContainer">
+                </div>
+        </div>
+    </div>
+
+    <div id="contactModal" class="modal-overlay">
+        <div class="glass-modal contact-modal-container">
+            <div class="modal-header">
+                <h3>Contact Us</h3>
+                <button class="close-btn" onclick="closeContactModal()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body contact-body">
+                <div class="contact-row">
+                    <i class="fa-solid fa-envelope"></i>
+                    <a href="mailto:americancornermtaani@gmail.com">americancornermtaani@gmail.com</a>
+                </div>
+                <div class="contact-row">
+                    <i class="fa-solid fa-phone"></i>
+                    <a href="tel:+254202739893">+254 20 273 9893</a>
+                </div>
+                <div class="social-row">
+                    <a href="https://web.facebook.com/people/American-Corner-Mtaani/61565093887159/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/usembassykenya" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://twitter.com/USEmbassyKenya" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
