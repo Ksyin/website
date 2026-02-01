@@ -345,7 +345,7 @@
       });
 
       $("#waCheckout").addEventListener("click", () => {
-        const phone = "254700000000"; // TODO: change to your WhatsApp number (no +)
+        const phone = "+254746283504"; // TODO: change to your WhatsApp number (no +)
         const lines = items.map(it => `• ${it.name}${it.variant ? " ("+it.variant+")" : ""} ×${it.qty} = ${money((it.price*it.qty))}`);
         const msg = [
           "Hello Cupcake City 👋",
