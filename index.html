@@ -17,11 +17,14 @@
       <span class="brand-name"> Angie Cupcake City</span>
     </a>
 
-    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-nav-toggle>
-      <span class="nav-toggle-bar"></span>
-      <span class="nav-toggle-bar"></span>
-      <span class="nav-toggle-bar"></span>
-    </button>
+   <!-- Replace the existing nav-toggle button -->
+<button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-nav-toggle>
+  <svg class="nav-toggle-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <path d="M3 12H21" stroke="var(--brand)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M3 6H21" stroke="var(--brand)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M3 18H21" stroke="var(--brand)" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+</button>
 
     <nav class="site-nav" data-site-nav>
       <a href="shop/index.html">Shop</a>
