@@ -8,173 +8,25 @@
 <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
 <link rel="stylesheet" href="css/styles.css" />
 <title>Cupcake City | Fresh cupcakes in Kiambu</title>
-
-<style>
-  /* Modern Enhancements - Embedded for quick visual upgrade */
-  :root {
-    --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  /* Hero Improvements */
-  .hero {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-media img {
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: transform;
-  }
-
-  .hero:hover .hero-media img {
-    transform: scale(1.08);
-  }
-
-  /* Product Card Modern Hover */
-  .product-card {
-    transition: var(--transition);
-  }
-
-  .product-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 25px 60px rgba(255, 79, 135, 0.18);
-  }
-
-  .product-img {
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .product-card:hover .product-img {
-    transform: scale(1.1);
-  }
-
-  /* Button Enhancements */
-  .btn {
-    position: relative;
-    overflow: hidden;
-    transition: var(--transition);
-  }
-
-  .btn::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 40%;
-    height: 400%;
-    background: linear-gradient(
-      120deg,
-      transparent,
-      rgba(255,255,255,0.4),
-      transparent
-    );
-    transform: skewX(-25deg);
-    transition: left 0.7s;
-  }
-
-  .btn:hover::after {
-    left: 150%;
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 20px 35px rgba(255, 79, 135, 0.35);
-  }
-
-  /* Navigation Improvements */
-  .site-nav a {
-    position: relative;
-    transition: var(--transition);
-  }
-
-  .site-nav a::after {
-    content: '';
-    position: absolute;
-    bottom: 6px;
-    left: 12px;
-    width: 0;
-    height: 2px;
-    background: var(--brand);
-    transition: width 0.3s ease;
-  }
-
-  .site-nav a:hover::after {
-    width: calc(100% - 24px);
-  }
-
-  /* Home Button */
-  .nav-home {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-weight: 700;
-  }
-
-  /* Kicker Animation */
-  .kicker {
-    animation: float 3s ease-in-out infinite;
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-4px); }
-  }
-
-  /* Card Reveal Animation */
-  .product-card {
-    opacity: 0;
-    transform: translateY(30px);
-    animation: cardPop 0.6s forwards;
-  }
-
-  .product-card:nth-child(1) { animation-delay: 100ms; }
-  .product-card:nth-child(2) { animation-delay: 200ms; }
-  .product-card:nth-child(3) { animation-delay: 300ms; }
-  .product-card:nth-child(4) { animation-delay: 400ms; }
-
-  @keyframes cardPop {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* Toast Improvement */
-  #toast.show {
-    animation: toastSlide 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-
-  @keyframes toastSlide {
-    from {
-      transform: translateX(-50%) translateY(30px);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(-50%) translateY(-2px);
-      opacity: 1;
-    }
-  }
-</style>
 </head>
 <body>
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="index.html" aria-label="Angie Cupcake City">
+    <a class="brand" href="index.html" aria-label=" Angie Cupcake City">
       <span class="brand-mark" aria-hidden="true">🧁</span>
-      <span class="brand-name">Angie Cupcake City</span>
+      <span class="brand-name"> Angie Cupcake City</span>
     </a>
 
-    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-nav-toggle>
-      <svg class="nav-toggle-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M3 12H21" stroke="var(--brand)" stroke-width="2" stroke-linecap="round"/>
-        <path d="M3 6H21" stroke="var(--brand)" stroke-width="2" stroke-linecap="round"/>
-        <path d="M3 18H21" stroke="var(--brand)" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-    </button>
+   <!-- Replace the existing nav-toggle button -->
+<button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-nav-toggle>
+  <svg class="nav-toggle-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <path d="M3 12H21" stroke="var(--brand)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M3 6H21" stroke="var(--brand)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M3 18H21" stroke="var(--brand)" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+</button>
 
     <nav class="site-nav" data-site-nav>
-      <!-- Added Home link -->
-      <a href="index.html" class="nav-home">🏠 Home</a>
       <a href="shop/index.html">Shop</a>
       <a href="about/index.html">About</a>
       <a href="contact/index.html">Contact</a>
@@ -189,7 +41,7 @@
   <section class="hero">
     <div class="container hero-inner">
       <div class="hero-card">
-        <div class="kicker">Made fresh • Homemade • Kiambu</div>
+        <div class="kicker">Made fresh •Homemade• Kiambu </div>
         <h1>Sweet cupcakes for birthdays, events, and everyday cravings.</h1>
         <p>Shop cupcake packs, add to cart, and checkout in seconds. Need a custom theme? We can do it.</p>
         <div class="product-actions">
@@ -200,7 +52,7 @@
       </div>
 
       <div class="hero-media" aria-hidden="true">
-        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1600&q=80" alt="Delicious cupcakes" />
+        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1600&q=80" alt="" />
       </div>
     </div>
   </section>
@@ -247,9 +99,9 @@
     <div>
       <div class="footer-brand">
         <span aria-hidden="true">🧁</span>
-        <strong>Angie's Cupcake City</strong>
+        <strong> Angie's Cupcakes City</strong>
       </div>
-      <p class="muted">Fresh homemade cupcakes baked daily in Kiambu. Pre-order for events and same-day pickups (subject to availability).</p>
+      <p class="muted">Fresh  home-made cupcakes baked daily in Kiambu. Pre-order for events and same-day pickups (subject to availability).</p>
     </div>
 
     <div>
@@ -266,37 +118,152 @@
       <h4>Contact</h4>
       <ul class="footer-links">
         <li><a href="tel:+254 746-283-504">+254 746-283-504</a></li>
-        <li><a href="mailto:contactangiecupcakecity@gmail.com">contactangiecupcakecity@gmail.com</a></li>
+        <li><a href="mailto:contactangiecupcakecity@gmail.com ">contactangiecupcakecity@gmail.com</a></li>
         <li class="muted">Kiambu, Kenya</li>
       </ul>
     </div>
   </div>
 
   <div class="container footer-bottom">
-    <small class="muted">© 2026 Angie Cupcake City • All rights reserved.</small>
+    <small class="muted">© contactangiecupcakecity@gmail.com  All rights reserved.</small>
   </div>
 </footer>
 
 <div id="toast" role="status" aria-live="polite"></div>
 
 <script>
-// Your existing products array (unchanged)
-window.CC_PRODUCTS = [ /* ... your full products array here ... */ ];
+window.CC_PRODUCTS = [
+  {
+    "id": "classic-vanilla-6",
+    "name": "Classic Vanilla ",
+    "category": "Cupcakes",
+    "price": 900,
+    "compareAt": 1200,
+    "image": "https://plus.unsplash.com/premium_photo-1663840297066-f85d9f661396?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "short": "Light vanilla sponge with silky buttercream.",
+    "description": "A crowd-pleaser: fluffy vanilla cupcakes topped with smooth vanilla buttercream. Great for office treats, birthdays, and events.",
+    "tags": ["vanilla", "best-seller"],
+    "variants": ["Vanilla", "Vanilla + Sprinkles", "Vanilla + Strawberry drizzle"],
+    "featured": true
+  },
+  {
+    "id": "choco-fudge-4",
+    "name": "Rich  Chocolate",
+    "category": "cakes/cupcakes",
+    "price": 720,
+    "compareAt": 0,
+    "image": "https://images.unsplash.com/photo-1758682016284-78f5266d5743?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "short": "Rich chocolate sponge + fudge frosting.",
+    "description": "Deep cocoa cupcakes finished with a glossy fudge frosting. Perfect when you want something bold and chocolatey.",
+    "tags": ["chocolate"],
+    "variants": ["Classic cup cakes", " Choco chips", "Fudge + Oreo crumbs"],
+    "featured": true
+  },
+  {
+    "id": "red-velvet-6",
+    "name": "Red Velvet ",
+    "category": "Cupcakes-cakes",
+    "price": 800,
+    "compareAt": 0,
+    "image": "https://plus.unsplash.com/premium_photo-1714146015360-60482004897b?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "short": "Velvety crumb with cream-cheese swirl.",
+    "description": "Soft red velvet cupcakes topped with a lightly tangy cream-cheese frosting. A classic celebration flavour.",
+    "tags": ["red-velvet"],
+    "variants": ["Classic", "Extra Cream Cheese", "Heart Sprinkles"],
+    "featured": false
+  },
+  {
+    "id": "lemon-zest-6",
+    "name": " Blue Berry Lemon Jam ",
+    "category": "Cupcakes",
+    "price": 650,
+    "compareAt": 0,
+    "image": "https://plus.unsplash.com/premium_photo-1714942927757-aeba4c2f4200?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "short": "Bright lemon + smooth vanilla glaze.",
+    "description": "Fresh lemon flavour with a soft crumb and a light glaze. Best served chilled for extra zing.",
+    "tags": ["citrus"],
+    "variants": ["Classic Lemon", "Lemon + Poppy", "Lemon + Blueberry"],
+    "featured": false
+  },
+  {
+    "id": "kids-party-12",
+    "name": "Coconut confetti",
+    "category": "Bundles",
+    "price": 2100,
+    "compareAt": 2400,
+    "image": "https://images.https://plus.unsplash.com/premium_photo-1664391881455-4d1966d1522a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Q29jb251dCUyMGNvbmZldHRpY2FrZXxlbnwwfHwwfHx8MA%3D%3Dunsplash.com/photo-1642267885415-9b23f34f89af?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "short": "A colourful mix for birthdays & school events.",
+    "description": "A fun assortment (vanilla, chocolate, strawberry) with colourful sprinkles. Great for kid-friendly celebrations.",
+    "tags": ["bundle", "kids"],
+    "variants": ["Mixed Flavours", "Chocolate-Heavy Mix", "Vanilla-Heavy Mix"],
+    "featured": true
+  },
+  {
+    "id": "wedding-white-12",
+    "name": "Peanut Butter ",
+    "category": "Events",
+    "price": 900,
+    "compareAt": 0,
+    "image": "https://images.unsplahttps://images.unsplash.com/photo-1642646906737-eaea251ff2f6?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8UGVhbnV0JTIwQnV0dGVyY2FrZXxlbnwwfHwwfHx8MA%3D%3Dsh.com/photo-1630534591989-7858079986a6?q=80&w=686&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "short": "Elegant white cupcakes for weddings & ceremonies.",
+    "description": "Elegant vanilla cupcakes with smooth white frosting and subtle pearl sprinkles. Ideal for weddings, baby showers, and formal events.",
+    "tags": ["event", "premium"],
+    "variants": ["Pearl Sprinkles", "Gold Dust", "Rose Petals (Edible)"],
+    "featured": false
+  },
+    {
+    "id": "passion-fruit-9",
+    "name": "passion fruit",
+    "category": "Events",
+    "price": 900,
+    "compareAt": 0,
+    "image": "https://images.unsplashhttps://plus.unsplash.com/premium_photo-1713721662826-5506a9667d32?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGFzc2lvbiUyMGZydWl0JTIwY2FrZXxlbnwwfHwwfHx8MA%3D%3D.com/photo-1630534591989-7858079986a6?q=80&w=686&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "short": "Elegant white cupcakes for weddings & ceremonies.",
+    "description": "Elegant vanilla cupcakes with smooth white frosting and subtle pearl sprinkles. Ideal for weddings, baby showers, and formal events.",
+    "tags": ["event", "premium"],
+    "variants": ["Pearl Sprinkles", "Gold Dust", "Rose Petals (Edible)"],
+    "featured": false
+  },
+   
+    {
+    "id": "banana-caramel-9",
+    "name": "Sprinkle banana caramel",
+    "category": "Events",
+    "price": 900,
+    "compareAt": 0,
+    "image": "https://images.unshttps://plus.unsplash.com/premium_photo-1663839331443-3c4520408a7c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8U3ByaW5rbGUlMjBiYW5hbmElMjBjYXJhbWVsY2FrZXxlbnwwfHwwfHx8MA%3D%3Dplash.com/photo-1630534591989-7858079986a6?q=80&w=686&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "short": "Elegant white cupcakes for weddings & ceremonies.",
+    "description": "Elegant vanilla cupcakes with smooth white frosting and subtle pearl sprinkles. Ideal for weddings, baby showers, and formal events.",
+    "tags": ["event", "premium"],
+    "variants": ["Pearl Sprinkles", "Gold Dust", "Rose Petals (Edible)"],
+    "featured": false
+  },
+    {
+    "id": "black-velvet-9",
+    "name": "Black Velvet ",
+    "category": "Events",
+    "price": 900,
+    "compareAt": 0,
+    "image": "https://images.unsplash.cohttps://images.unsplash.com/photo-1710417575777-c5e762f1b264?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8QmxhY2slMjBWZWx2ZXQlMjBjYWtlfGVufDB8fDB8fHwwm/photo-1630534591989-7858079986a6?q=80&w=686&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "short": "Elegant white cupcakes for weddings & ceremonies.",
+    "description": "Elegant vanilla cupcakes with smooth white frosting and subtle pearl sprinkles. Ideal for weddings, baby showers, and formal events.",
+    "tags": ["event", "premium"],
+    "variants": ["Pearl Sprinkles", "Gold Dust", "Rose Petals (Edible)"],
+    "featured": false
+  }
 
-// Keep your existing script tags for main.js and inline featured products
+
+];
+
 </script>
-
 <script src="js/main.js"></script>
-
 <script>
-  // Re-render featured products with animation support
   (function(){
     const list = (window.CC_PRODUCTS || []).filter(p => p.featured).slice(0, 6);
     const grid = document.getElementById("homeFeatured");
     if (!grid) return;
-
-    grid.innerHTML = list.map((p, index) => `
-      <article class="card product-card" style="animation-delay: ${index * 80}ms">
+    grid.innerHTML = list.map(p => `
+      <article class="card product-card">
         <a class="product-link" href="product/index.html?id=${encodeURIComponent(p.id)}" aria-label="${p.name}">
           <img class="product-img" src="${p.image}" alt="${p.name}" loading="lazy" />
         </a>
