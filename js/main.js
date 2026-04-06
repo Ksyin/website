@@ -375,6 +375,10 @@
       .replaceAll("'", "&#039;");
   }
 
+
+
+  
+
   document.addEventListener("DOMContentLoaded", () => {
     setupNav();
     syncCartBadges();
@@ -382,5 +386,55 @@
     renderProduct();
     renderCart();
   });
+
+
+
+  // ---------- Scroll Reveal Animations ----------
+function setupScrollReveal() {
+  const elements = document.querySelectorAll(".reveal");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  elements.forEach((el) => observer.observe(el));
+}
+
+// ---------- Smooth scroll ----------
+function setupSmoothScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function (e) {
+      const target = document.querySelector(this.getAttribute("href"));
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+}
+
+// ---------- Parallax effect (hero image) ----------
+function setupParallax() {
+  const heroImg = document.querySelector(".hero-media img");
+  if (!heroImg) return;
+
+  window.addEventListener("scroll", () => {
+    const offset = window.scrollY * 0.2;
+    heroImg.style.transform = `translateY(${offset}px) scale(1.05)`;
+  });
+}
+
+// ---------- Init ----------
+document.addEventListener("DOMContentLoaded", () => {
+  setupScrollReveal();
+  setupSmoothScroll();
+  setupParallax();
+});
 
 })();
