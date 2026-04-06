@@ -1,13 +1,372 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="Learn about Cupcake City and how we bake." />
-<meta name="theme-color" content="#ff4f87" />
-<link rel="preconnect" href="https://images.unsplash.com" crossorigin>
-<link rel="stylesheet" href="../css/styles.css" />
-<title>About | Cupcake City</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="Step inside Cupcake City — Nairobi's modern cupcake studio. Watch our story, meet the baker, and taste the love in every bite." />
+  <meta name="theme-color" content="#ff4f87" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <title>About | Cupcake City — Modern baking studio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fef7f2;
+      color: #2e241f;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== HEADER & NAV (modernized) ===== */
+    .site-header {
+      background: white;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.02), 0 2px 6px rgba(0,0,0,0.03);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(2px);
+      background: rgba(255,255,245,0.96);
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.6rem;
+      letter-spacing: -0.3px;
+    }
+    .brand-mark {
+      font-size: 2rem;
+      filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
+    }
+    .brand-name {
+      background: linear-gradient(135deg, #ff4f87, #ff8c5a);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .site-nav {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .site-nav a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #2e241f;
+      transition: 0.2s;
+      font-size: 1rem;
+    }
+    .site-nav a:hover {
+      color: #ff4f87;
+    }
+    .nav-cart {
+      background: #fce4e4;
+      padding: 6px 14px;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .cart-badge {
+      background: #ff4f87;
+      color: white;
+      border-radius: 30px;
+      padding: 2px 8px;
+      font-size: 0.75rem;
+    }
+    @media (max-width: 700px) {
+      .nav-toggle {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .nav-toggle-bar {
+        width: 26px;
+        height: 2px;
+        background: #2e241f;
+        border-radius: 2px;
+      }
+      .site-nav {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        padding: 20px 0;
+        gap: 18px;
+      }
+      .site-nav.open {
+        display: flex;
+      }
+      .header-inner {
+        flex-wrap: wrap;
+      }
+    }
+
+    /* ===== HERO SECTION with video ===== */
+    .hero-about {
+      background: linear-gradient(120deg, #fff2e9 0%, #ffe6dc 100%);
+      border-radius: 48px;
+      margin: 32px 0 48px 0;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+    }
+    .hero-content {
+      padding: 48px 0 48px 48px;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,79,135,0.15);
+      backdrop-filter: blur(4px);
+      padding: 6px 14px;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #c73b6b;
+      margin-bottom: 20px;
+    }
+    .hero-content h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.2;
+      background: linear-gradient(to right, #2e241f, #c73b6b);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 20px;
+    }
+    .hero-content p {
+      font-size: 1.2rem;
+      color: #4a3b33;
+      margin-bottom: 28px;
+    }
+    .hero-video {
+      padding: 24px 24px 24px 0;
+    }
+    .video-wrapper {
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 25px 40px -12px rgba(0,0,0,0.25);
+      background: #000;
+      aspect-ratio: 16 / 9;
+    }
+    .video-wrapper video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    @media (max-width: 860px) {
+      .hero-about {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-content {
+        padding: 40px 28px 20px;
+      }
+      .hero-video {
+        padding: 0 24px 32px;
+      }
+    }
+
+    /* ===== modern image gallery mosaic ===== */
+    .story-section {
+      margin: 70px 0;
+    }
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .section-sub {
+      text-align: center;
+      color: #7f6b5e;
+      max-width: 600px;
+      margin: 0 auto 48px auto;
+    }
+    .mosaic-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .mosaic-item {
+      border-radius: 28px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 12px 22px -10px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease;
+    }
+    .mosaic-item:hover {
+      transform: translateY(-6px);
+    }
+    .mosaic-item img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      transition: 0.4s;
+    }
+    .mosaic-caption {
+      padding: 14px 16px 18px;
+      background: white;
+    }
+    .mosaic-caption h4 {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    .mosaic-caption p {
+      color: #6b5b50;
+      font-size: 0.85rem;
+      margin-top: 6px;
+    }
+    @media (max-width: 800px) {
+      .mosaic-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 500px) {
+      .mosaic-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* modern ingredient & values cards */
+    .values-showcase {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: center;
+      margin: 48px 0;
+    }
+    .value-card {
+      background: white;
+      border-radius: 36px;
+      padding: 32px 24px;
+      flex: 1 1 260px;
+      text-align: center;
+      transition: all 0.25s;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.02), 0 4px 8px rgba(0,0,0,0.05);
+      border: 1px solid rgba(255,79,135,0.1);
+    }
+    .value-card i {
+      font-size: 2.5rem;
+      background: #ffe9e9;
+      padding: 16px;
+      border-radius: 60px;
+      color: #ff4f87;
+      margin-bottom: 20px;
+    }
+    .value-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+
+    /* interactive notice / CTA */
+    .custom-cta {
+      background: linear-gradient(115deg, #ffede3, #fff0e8);
+      border-radius: 48px;
+      padding: 48px 32px;
+      text-align: center;
+      margin: 60px 0 40px;
+    }
+    .btn-modern {
+      display: inline-block;
+      background: #ff4f87;
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 60px;
+      font-weight: 600;
+      text-decoration: none;
+      margin-top: 20px;
+      transition: 0.2s;
+      box-shadow: 0 5px 12px rgba(255,79,135,0.3);
+    }
+    .btn-modern:hover {
+      background: #e63e70;
+      transform: scale(0.97);
+    }
+    footer {
+      background: #2e241f;
+      color: #e7ddd6;
+      padding: 48px 0 24px;
+      margin-top: 60px;
+      border-radius: 40px 40px 0 0;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+      gap: 40px;
+    }
+    .footer-links {
+      list-style: none;
+    }
+    .footer-links li {
+      margin-bottom: 8px;
+    }
+    .footer-links a {
+      color: #f5cdc2;
+      text-decoration: none;
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: 40px;
+      padding-top: 24px;
+      text-align: center;
+    }
+    .muted {
+      opacity: 0.7;
+    }
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #2e241f;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 60px;
+      font-size: 0.9rem;
+      opacity: 0;
+      transition: 0.2s;
+      pointer-events: none;
+      z-index: 999;
+    }
+  </style>
 </head>
 <body>
 <header class="site-header">
@@ -16,51 +375,118 @@
       <span class="brand-mark" aria-hidden="true">🧁</span>
       <span class="brand-name">Cupcake City</span>
     </a>
-
     <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-nav-toggle>
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
     </button>
-
     <nav class="site-nav" data-site-nav>
-      <a href="../shop/index.html">Shop</a>
-      <a href="../about/index.html">About</a>
-      <a href="../contact/index.html">Contact</a>
+      <a href="../shop/index.html"><i class="fas fa-store"></i> Shop</a>
+      <a href="../about/index.html"><i class="fas fa-heart"></i> About</a>
+      <a href="../contact/index.html"><i class="fas fa-envelope"></i> Contact</a>
       <a class="nav-cart" href="../cart/index.html" aria-label="Cart">
-        Cart <span class="cart-badge" data-cart-count>0</span>
+        <i class="fas fa-shopping-bag"></i> Cart <span class="cart-badge" data-cart-count>0</span>
       </a>
     </nav>
   </div>
 </header>
 
-<main class="container">
-  <div class="page-head">
-    <h1>About us</h1>
-    <p>Small batch, consistent quality, friendly service.</p>
-  </div>
-
-  <div class="card" style="padding:18px;">
-    <h2 style="margin-top:0;">What we do</h2>
-    <p class="muted">Cupcake City is a Nairobi-based cupcake studio. We bake fresh daily and take pre-orders for events like birthdays, weddings, office parties, and baby showers.</p>
-
-    <div class="grid" style="margin-top:14px;">
-      <div class="card" style="padding:16px;">
-        <strong>Fresh ingredients</strong>
-        <p class="muted">We focus on flavour first — balanced sweetness and soft crumb.</p>
+<main>
+  <div class="container">
+    <!-- Hero with video & modern twist -->
+    <div class="hero-about">
+      <div class="hero-content">
+        <span class="hero-badge"><i class="fas fa-camera"></i> Fresh from the oven</span>
+        <h1>Where cupcakes<br>become memories</h1>
+        <p>Every swirl of buttercream, every sprinkle — baked with love in Kiambu. Watch our story unfold.</p>
+        <a href="#story" class="btn-modern" style="background:#2e241f; box-shadow:none;">Explore our journey <i class="fas fa-arrow-right"></i></a>
       </div>
-      <div class="card" style="padding:16px;">
-        <strong>Event-ready</strong>
-        <p class="muted">We offer clean, elegant styles plus fun kid-friendly sets.</p>
-      </div>
-      <div class="card" style="padding:16px;">
-        <strong>Fast checkout</strong>
-        <p class="muted">Add to cart and checkout using WhatsApp with full order details.</p>
+      <div class="hero-video">
+        <div class="video-wrapper">
+          <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1587668847676-5fad23c5c933?auto=format&fit=crop&w=800&q=80">
+            <source src="https://cdn.pixabay.com/video/2023/07/14/172766-846258789_large.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
       </div>
     </div>
 
-    <div class="notice" style="margin-top:16px;">
-      Want a custom theme or branded cupcakes? <a href="../contact/index.html"><strong>Contact us</strong></a> and we’ll plan it together.
+    <!-- modern story with images -->
+    <div id="story" class="story-section">
+      <h2 class="section-title">Sweetness in every detail</h2>
+      <p class="section-sub">Step inside Cupcake City — small batch, big heart. From our kitchen to your table.</p>
+      <div class="mosaic-grid">
+        <div class="mosaic-item">
+          <img src="https://images.unsplash.com/photo-1550617931-e17a7b70dce2?auto=format&fit=crop&w=800&q=80" alt="Baker decorating cupcake">
+          <div class="mosaic-caption">
+            <h4>Artisan touch</h4>
+            <p>Hand-piped buttercream & fresh garnishes.</p>
+          </div>
+        </div>
+        <div class="mosaic-item">
+          <img src="https://images.unsplash.com/photo-1614707267537-2f3b9fbf3d3b?auto=format&fit=crop&w=800&q=80" alt="Colorful cupcake tray">
+          <div class="mosaic-caption">
+            <h4>Vibrant flavours</h4>
+            <p>Vanilla, red velvet, lemon zest & more.</p>
+          </div>
+        </div>
+        <div class="mosaic-item">
+          <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=800&q=80" alt="Baking ingredients">
+          <div class="mosaic-caption">
+            <h4>Real ingredients</h4>
+            <p>No shortcuts, real butter & free-range eggs.</p>
+          </div>
+        </div>
+        <div class="mosaic-item">
+          <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=800&q=80" alt="Celebration cupcakes">
+          <div class="mosaic-caption">
+            <h4>Event ready</h4>
+            <p>Weddings, birthdays, corporate treats.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- interactive value cards (modern) -->
+    <div class="values-showcase">
+      <div class="value-card">
+        <i class="fas fa-leaf"></i>
+        <h3>Fresh daily</h3>
+        <p class="muted">We bake before sunrise to deliver unmatched softness and flavour. No day-olds, ever.</p>
+      </div>
+      <div class="value-card">
+        <i class="fas fa-hand-sparkles"></i>
+        <h3>Custom designs</h3>
+        <p class="muted">Need unicorns, elegant florals, or brand logos? We create edible art for any occasion.</p>
+      </div>
+      <div class="value-card">
+        <i class="fas fa-whatsapp"></i>
+        <h3>WhatsApp checkout</h3>
+        <p class="muted">Order in seconds — we confirm everything via WhatsApp with real-time updates.</p>
+      </div>
+    </div>
+
+    <!-- modern card: meet the baker + team story -->
+    <div style="background: white; border-radius: 48px; padding: 40px; margin: 30px 0; box-shadow: 0 15px 35px rgba(0,0,0,0.05);">
+      <div style="display: flex; flex-wrap: wrap; gap: 30px; align-items: center;">
+        <div style="flex: 1.2;">
+          <img src="https://images.unsplash.com/photo-1568640344763-2900c6e2ffb7?auto=format&fit=crop&w=800&q=80" alt="baker portrait" style="width:100%; border-radius: 32px; object-fit: cover; height: 320px;">
+        </div>
+        <div style="flex: 2;">
+          <span class="hero-badge" style="background:#ff4f8710;"><i class="fas fa-heart"></i> Meet Angie</span>
+          <h2 style="font-size: 2rem; margin: 12px 0;">Founder & Head Baker</h2>
+          <p style="font-size:1.05rem;">"Cupcake City started in my tiny kitchen with a mixer and a dream. Today, we’re a team of passionate bakers who believe that a cupcake can turn a regular day into a celebration. Every order is personal — we text you the baking video, we save your favourite flavours."</p>
+          <p style="margin-top: 12px;">📍 Based in Kiambu, delivering smiles across Nairobi & beyond. Our philosophy: <strong>bold taste, beautiful design, no compromise</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- custom theme notice modernized -->
+    <div class="custom-cta">
+      <i class="fas fa-magic" style="font-size: 2.2rem; color:#ff4f87;"></i>
+      <h3 style="font-size: 1.9rem; margin: 12px 0;">Need a custom theme?</h3>
+      <p>From brand logos on cupcakes to themed wedding towers — we design edible moments.<br>Let’s plan your event together.</p>
+      <a href="../contact/index.html" class="btn-modern"><i class="fas fa-comment"></i> Request a custom quote</a>
     </div>
   </div>
 </main>
@@ -74,7 +500,6 @@
       </div>
       <p class="muted">Fresh cupcakes baked daily in Kiambu. Pre-order for events and same-day pickups (subject to availability).</p>
     </div>
-
     <div>
       <h4>Quick links</h4>
       <ul class="footer-links">
@@ -84,145 +509,86 @@
         <li><a href="../contact/index.html">Contact</a></li>
       </ul>
     </div>
-
     <div>
       <h4>Contact</h4>
       <ul class="footer-links">
-        <li><a href="tel:+254746283504">+254 746-283-504</a></li>
-        <li><a href="mailto:contactangiecupcakecity@gmail.com ">contactangiecupcakecity@gmail.com</a></li>
-        <li class="muted">Kiambu, Kenya</li>
+        <li><a href="tel:+254746283504"><i class="fas fa-phone-alt"></i> +254 746-283-504</a></li>
+        <li><a href="mailto:contactangiecupcakecity@gmail.com"><i class="fas fa-envelope"></i> contactangiecupcakecity@gmail.com</a></li>
+        <li class="muted"><i class="fas fa-map-marker-alt"></i> Kiambu, Kenya</li>
       </ul>
     </div>
   </div>
-
   <div class="container footer-bottom">
-    <small class="muted">© contactangiecupcakecity@gmail.com . All rights reserved.</small>
+    <small class="muted">© Cupcake City — contactangiecupcakecity@gmail.com . All rights reserved.</small>
   </div>
 </footer>
-<div id="toast" role="status" aria-live="polite"></div>
+<div id="toast" role="status" aria-live="polite" class="toast"></div>
 
 <script>
-window.CC_PRODUCTS = [
-  {
-    "id": "classic-vanilla-6",
-    "name": "Classic Vanilla (6 Pack)",
-    "category": "Cupcakes",
-    "price": 1050,
-    "compareAt": 1200,
-    "image": "https://images.unsplash.com/photo-1589307004391-70fcdcf8a3c7?auto=format&fit=crop&w=1200&q=80",
-    "short": "Light vanilla sponge with silky buttercream.",
-    "description": "A crowd-pleaser: fluffy vanilla cupcakes topped with smooth vanilla buttercream. Great for office treats, birthdays, and events.",
-    "tags": [
-      "vanilla",
-      "best-seller"
-    ],
-    "variants": [
-      "Vanilla",
-      "Vanilla + Sprinkles",
-      "Vanilla + Strawberry drizzle"
-    ],
-    "featured": true
-  },
-  {
-    "id": "choco-fudge-4",
-    "name": "Chocolate Fudge (4 Pack)",
-    "category": "Cupcakes",
-    "price": 720,
-    "compareAt": 0,
-    "image": "https://images.unsplash.com/photo-1599785209707-28d08b7d35a3?auto=format&fit=crop&w=1200&q=80",
-    "short": "Rich chocolate sponge + fudge frosting.",
-    "description": "Deep cocoa cupcakes finished with a glossy fudge frosting. Perfect when you want something bold and chocolatey.",
-    "tags": [
-      "chocolate"
-    ],
-    "variants": [
-      "Classic Fudge",
-      "Fudge + Choco chips",
-      "Fudge + Oreo crumbs"
-    ],
-    "featured": true
-  },
-  {
-    "id": "red-velvet-6",
-    "name": "Red Velvet (6 Pack)",
-    "category": "Cupcakes",
-    "price": 1200,
-    "compareAt": 0,
-    "image": "https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=1200&q=80",
-    "short": "Velvety crumb with cream-cheese swirl.",
-    "description": "Soft red velvet cupcakes topped with a lightly tangy cream-cheese frosting. A classic celebration flavour.",
-    "tags": [
-      "red-velvet"
-    ],
-    "variants": [
-      "Classic",
-      "Extra Cream Cheese",
-      "Heart Sprinkles"
-    ],
-    "featured": false
-  },
-  {
-    "id": "lemon-zest-6",
-    "name": "Lemon Zest (6 Pack)",
-    "category": "Cupcakes",
-    "price": 1100,
-    "compareAt": 0,
-    "image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=1200&q=80",
-    "short": "Bright lemon + smooth vanilla glaze.",
-    "description": "Fresh lemon flavour with a soft crumb and a light glaze. Best served chilled for extra zing.",
-    "tags": [
-      "citrus"
-    ],
-    "variants": [
-      "Classic Lemon",
-      "Lemon + Poppy",
-      "Lemon + Blueberry"
-    ],
-    "featured": false
-  },
-  {
-    "id": "kids-party-12",
-    "name": "Kids Party Mix (12 Pack)",
-    "category": "Bundles",
-    "price": 2100,
-    "compareAt": 2400,
-    "image": "https://images.unsplash.com/photo-1614707267537-2f3b9fbf3d3b?auto=format&fit=crop&w=1200&q=80",
-    "short": "A colourful mix for birthdays & school events.",
-    "description": "A fun assortment (vanilla, chocolate, strawberry) with colourful sprinkles. Great for kid-friendly celebrations.",
-    "tags": [
-      "bundle",
-      "kids"
-    ],
-    "variants": [
-      "Mixed Flavours",
-      "Chocolate-Heavy Mix",
-      "Vanilla-Heavy Mix"
-    ],
-    "featured": true
-  },
-  {
-    "id": "wedding-white-12",
-    "name": "Wedding White (12 Pack)",
-    "category": "Events",
-    "price": 2600,
-    "compareAt": 0,
-    "image": "https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=1200&q=80",
-    "short": "Elegant white cupcakes for weddings & ceremonies.",
-    "description": "Elegant vanilla cupcakes with smooth white frosting and subtle pearl sprinkles. Ideal for weddings, baby showers, and formal events.",
-    "tags": [
-      "event",
-      "premium"
-    ],
-    "variants": [
-      "Pearl Sprinkles",
-      "Gold Dust",
-      "Rose Petals (Edible)"
-    ],
-    "featured": false
+  // Mini interactive cart count update (static reference from existing product data)
+  window.CC_PRODUCTS = window.CC_PRODUCTS || [
+    { id: "classic-vanilla-6", name: "Classic Vanilla (6 Pack)", price: 1050 },
+    { id: "choco-fudge-4", name: "Chocolate Fudge (4 Pack)", price: 720 }
+  ];
+  function updateCartBadge() {
+    const stored = localStorage.getItem('cupcake_cart');
+    let count = 0;
+    if (stored) {
+      try {
+        const cart = JSON.parse(stored);
+        count = cart.reduce((acc, item) => acc + (item.quantity || 1), 0);
+      } catch(e) {}
+    }
+    const badges = document.querySelectorAll('[data-cart-count]');
+    badges.forEach(b => { if(b) b.innerText = count; });
   }
-];
-
+  function showToastMsg(msg) {
+    const toastEl = document.getElementById('toast');
+    if(toastEl) {
+      toastEl.innerText = msg;
+      toastEl.style.opacity = '1';
+      setTimeout(() => { toastEl.style.opacity = '0'; }, 2500);
+    }
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    updateCartBadge();
+    // navigation toggle (mobile)
+    const toggleBtn = document.querySelector('[data-nav-toggle]');
+    const navMenu = document.querySelector('[data-site-nav]');
+    if(toggleBtn && navMenu) {
+      toggleBtn.addEventListener('click', () => {
+        const expanded = toggleBtn.getAttribute('aria-expanded') === 'true' ? false : true;
+        toggleBtn.setAttribute('aria-expanded', expanded);
+        navMenu.classList.toggle('open');
+      });
+    }
+    // interactive: simulate "modern" mini cart demo (show toast)
+    const cartLink = document.querySelector('.nav-cart');
+    if(cartLink) {
+      cartLink.addEventListener('click', (e) => {
+        const countElem = document.querySelector('[data-cart-count]');
+        let current = parseInt(countElem?.innerText) || 0;
+        if(current === 0) {
+          e.preventDefault();
+          showToastMsg('✨ Your cart is empty — start by adding cupcakes from the shop! ✨');
+        }
+      });
+    }
+    // Add fun hover animation on value cards
+    const cards = document.querySelectorAll('.value-card');
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-8px)';
+        card.style.boxShadow = '0 24px 36px -12px rgba(0,0,0,0.15)';
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0px)';
+        card.style.boxShadow = '0 10px 20px rgba(0,0,0,0.02), 0 4px 8px rgba(0,0,0,0.05)';
+      });
+    });
+  });
+  // Listen to storage changes for cart sync
+  window.addEventListener('storage', (e) => { if(e.key === 'cupcake_cart') updateCartBadge(); });
 </script>
-<script src="../js/main.js"></script>
 </body>
 </html>
